@@ -36,7 +36,7 @@ HTML 在 Web 迅猛发展的过程中起着重要作用，有着重要的地位�
 
 ## 3.蒂姆·伯纳斯·李
 
-![](../_media/1.jpg)
+![](./_media/1.jpg)
 
 > 蒂姆·伯纳斯·李 [1] （Tim Berners-Lee），OM，KBE，FRS，FREng，FRSA，（Sir Timothy John "Tim" Berners-Lee，1955 年 6 月 8 日－），英国计算机科学家。
 > 他是万维网的发明者，南安普顿大学与麻省理工学院教授。1990 年 12 月 25 日，罗伯特·卡里奥在 CERN 和他一起成功通过 Internet 实现了 HTTP 代理与服务器的第一次通讯。
