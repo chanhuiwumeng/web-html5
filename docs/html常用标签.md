@@ -3,6 +3,8 @@
 > 学习标签重点学习两个方面的内容:
 >
 > + 标签的语义(标签是干什么的)
+> + 根据标签的语义，选择合适的标签放置在合适的位置可以提升网页开发的效率。让网页的结构更清晰
+>   + 也方便他人阅读
 > + 标签的属性(创造标签是自带的属性值)
 
 ## 1.  标题标签
@@ -26,7 +28,7 @@
 
 ![image-20201013152537803](_media/image-20201013152537803.png)
 
-> ​ :warning: 在网页中一般我们使用H1来进行网页核心内容的描述，有助于搜索引擎在进行关键词爬虫获取的时候获取到SEO(Search Engin Optimization)，所以在一个网页中H1标签最多只有一个
+>  :warning: 在网页中一般我们使用H1来进行网页核心内容的描述，有助于搜索引擎在进行关键词爬虫获取的时候获取到SEO(Search Engin Optimization)，所以在一个网页中H1标签最多只有一个
 >
 >页面中的H1元素过多，搜索引擎会认为是作弊的，最终会导致K站
 
@@ -628,6 +630,8 @@ HTML 使用超级链接与网络上的另一个文档相连。
 
 ## 13. 列表标签
 
+> 列表可以整洁，整齐的，有序的展示数据，作为布局会更加自由和方便
+
 + 导航栏的制作
 + 信息列表
 + 页表标注
@@ -646,39 +650,239 @@ HTML 使用超级链接与网络上的另一个文档相连。
 
 ### 13.1 无序列表
 
++ ul 是li元素的父级元素,两者必须同时使用才会有列表的效果
++ 各个li元素之间是同级别的并列关系
+
+```html
+<ul>
+      <li>Hello World 1</li>
+      <li>Hello World 2</li>
+      <li>Hello World 3</li>
+      <li>Hello World 4</li>
+      <li>Hello World 5</li>
+    </ul>
+    <hr />
+    <ul style="list-style: circle">
+      <li>Hello World 1</li>
+      <li>Hello World 2</li>
+      <li>Hello World 3</li>
+      <li>Hello World 4</li>
+      <li>Hello World 5</li>
+    </ul>
+    <hr />
+    <ul>
+      <li><a href="">百度一下 1</a></li>
+      <li><a href="">百度一下 2</a></li>
+      <li><a href="">百度一下 3</a></li>
+      <li><a href="">百度一下 4</a></li>
+      <li><a href="">百度一下 5</a></li>
+    </ul>
+```
+
+![image-20201013203526446](_media/image-20201013203526446.png)
+
 ### 13.2 有序列表
+
+> 有序列表在网页中使用的相对少一点，有序列表的标记符也可以改变
+
+```html
+ <ol>
+      <li>Hello world 1</li>
+      <li>Hello world 2</li>
+      <li>Hello world 3</li>
+      <li>Hello world 4</li>
+      <li>Hello world 5</li>
+    </ol>
+```
+
+
+
+![image-20201013203620195](_media/image-20201013203620195.png)
 
 ### 13.3 自定义列表标签
 
-## 14. 视频标签
+> 自定义标签在有页面中使用的相对多多一点
 
-## 15.音频标签
+```html
+ <dl>
+      <dt>购物指南</dt>
+      <dd>购物流程</dd>
+      <dd>会员介绍</dd>
+      <dd>生活旅行</dd>
+      <dd>常见问题</dd>
+    </dl>
+    <dl>
+      <dt>配送方式</dt>
+      <dd>上门自提</dd>
+      <dd>211限时送</dd>
+      <dd>配送服务查询</dd>
+      <dd>海外配送</dd>
+    </dl>
+```
 
-## 16 下拉菜单
+![image-20201013204332577](_media/image-20201013204332577.png)
+
+## 14.文本格式化标签
+
++ b  加粗
++ u  下划线
++ del  删除线
++ i  斜体字
+
+```HTML
+	<b>Hello World</b>
+    <del>Hello Worlrd</del>
+    <u>Hello World</u>
+    <i>Hello World</i>
+```
+
+![image-20201013204750456](_media/image-20201013204750456.png)
+
+> I 标签通常用来在页面中红插入图标或者字体图标
+>
+> [为什么大家都用i标签用作小图标?](https://www.cnblogs.com/limeiky/p/6210829.html)
+>
+> 1. 用 <i> 元素做图标在语义上是不正确的（虽然看起来像 icon 的缩写）；
+> 2. <i> 比 <span> 短，但 gzip 后差异很小，不过打字可以少按三个键；
+> 3. 多数图标用的是空 <i> 元素，配合 ::before 伪元素实现，因为没有内容，读屏器不会朗读（这样即使有特殊处理也跳过了），机器理解起来应该也没什么影响。
+>
+> 综合来看，从实用性上暂时没看出有什么缺陷，所以目前用不用 <i> 取决于你对于遵循规范有多洁癖。（加载速度更快）
+
+![image-20201013205008466](_media/image-20201013205008466.png)
+
+## 15. 视频标签
+
++ autoplay  自动播放 必须集合muted播放静音才可以自动播放 值是autoplay 可以省略不写
++ controls 播放器的控件 值是controls 可以省略不写
++ loop 循环播放 值是loop 可以省略不写
++ width 定义播放器的宽
++ height 定义播放器的高
++ poster 规定视频下载时显示的图像，或者在用户点击播放按钮前显示的图像。
++ muted 规定视频的音频输出应该被静音。
+
+```html
+ <video src="https://www.w3school.com.cn/i/movie.ogg" controls="controls">
+      your browser does not support the video tag
+    </video>
+    <video
+      src="https://www.w3school.com.cn/i/movie.ogg"
+      controls="controls"
+      autoplay="autoplay"
+      muted
+      loop
+    >
+      your browser does not support the video tag
+    </video>
+
+    <video controls="controls">
+      your browser does not support the video tag
+      <source src="https://www.w3school.com.cn/i/movie.ogg" type="video/ogg" />
+      src="src="https://www.w3school.com.cn/i/movie.ogg"" type="video/mp4">
+    </video>
+```
+
+![](_media/GIF1.gif)
+
+## 16.音频标签
+
++ controls
++ autoplay
++ loop
++ muted
++ src
+
+```html
+ <audio src="https://www.w3school.com.cn/i/horse.ogg" controls>
+      你的李兰器不支持该音频格式
+    </audio>
+
+    <audio controls autoplay loop muted>
+      <source src="https://www.w3school.com.cn/i/horse.ogg" type="audio/ogg" />
+    </audio>
+```
+
+![](_media/GIF2.gif)
+
+> 在实际的项目中我们需要自己去写视频或者音频的播放器，或者使用第三方的视频播放器插件
+
+![image-20201013210921917](_media/image-20201013210921917.png)
+
+## 17 下拉菜单
+
+```html
+<select name="address" id="address">
+      <option value="陕西省">陕西省</option>
+      <option value="山东省">山东省</option>
+      <option value="河南省">河南省</option>
+      <option value="四川省">四川省</option>
+      <option value="河北省">河北省</option>
+      <option value="山西省">山西省</option>
+    </select>
+```
 
 
 
-## 17. Html5新增的标签
+![image-20201013211222841](_media/image-20201013211222841.png)
 
-### 17.1 artcle标签
+> 常见的省市级三级联动效果
 
-### 17.2 aside标签
+![image-20201013211402024](_media/image-20201013211402024.png)
 
-### 17.3 canvas标签
+## 18. Html5新增的标签
 
-### 17.4 datalist标签
+### 18.1 article标签
 
-### 17.5 embed标签
+### 18.2 aside标签
 
-### 17.6 footer标签
+### 18.3 canvas标签
 
-### 17.7 header标签
+### 18.4 datalist标签
 
-### 17.8 nav标签
+### 18.5 embed标签
 
-### 17.9 section标签
+### 18.6 footer标签
 
-### 17.10 time标签
+### 18.7 header标签
+
+### 18.8 nav标签
+
+### 18.9 section标签
+
+### 18.10 time标签
+
+```html
+<nav>导航栏，类似：首页|新闻|咨询|游戏|汽车</nav>
+<article>
+	<header>
+		包含大标题
+	</header>
+	<section>
+		包含小标题，和内容
+	</section>
+	<div>
+		通用
+	</div>
+	<footer>
+		尾部
+	</footer>
+</article>
+<aside>与article同级，一般为边栏内容</aside>
+```
+
+```html
+<canvas id="myCanvas">your browser does not support the canvas tag </canvas>
+
+<script type="text/javascript">
+
+var canvas=document.getElementById('myCanvas');
+var ctx=canvas.getContext('2d');
+ctx.fillStyle='#FF0000';
+ctx.fillRect(0,0,80,100);
+
+</script>
+```
 
 
+
+![image-20201013212100232](_media/image-20201013212100232.png)
 
