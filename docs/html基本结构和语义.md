@@ -5,7 +5,7 @@
 ```html
 <!-- documenttype 文档类型是 html 这是html5的声明头 告诉浏览器以哪种类型来调用哪个解析器核心来解析html -->
 <!DOCTYPE html>
-<!-- html代码书写的主框架 lang 是国际化的语言 默认是英文的 -->
+<!-- html代码书写的主框架 lang 是国际化的语言 默认是英文的 帮助翻译工具确定要使用的翻译规则-->
 <html lang="en">
   <!-- head是头 -->
   <head>
@@ -178,23 +178,43 @@ Chrome 浏览器是 google 旗下的浏览器。Chrome 浏览器至发布以来�
 
 ## 4. 开发工具
 
-### 4.1 Notpad++
+### 4.1  Notpad++
+
+[官网](https://notepad-plus.en.softonic.com/)
+
+![Notepad++](_media/notepad-plus-11194__notepad-plus-plus-icon.png)
 
 > 高级的记事本工具
 
-### 4.2 WebStrom
+### 4.2  WebStrom
+
+[官网](https://www.jetbrains.com/webstorm/)
+
+![img](_media/timg)
 
 > 好用 收费
 
-### 4.3 SublimeText3
+### 4.3  SublimeText3
+
+[官网](http://www.sublimetext.com/3)
+
+![img](_media/timg1)
 
 > 当年的前端开发神器 由于插件好用 但是安装有点费事
 
-### 4.4 Hbuilder
+### 4.4  Hbuilder
+
+[官网](https://www.dcloud.io/)
+
+![img](_media/u=3868436893,247772070&fm=26&gp=0.jpg)
 
 > 国产的前端开发工具 现在也相当的好用
 
-### 4.5 Vscode
+### 4.5  Vscode
+
+[官网](https://code.visualstudio.com/)
+
+![img](_media/u=116826999,3260180186&fm=26&gp=0.jpg)
 
 > 微软和红帽联合开发的编辑工具
 > 由于插件好用和启动相应速度快
