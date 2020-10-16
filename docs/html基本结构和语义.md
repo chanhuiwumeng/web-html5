@@ -3,15 +3,24 @@
 ## 1. 基本结构
 
 ```html
-<!-- documenttype 文档类型是 html 这是html5的声明头 告诉浏览器以哪种类型来调用哪个解析器核心来解析html -->
+<!-- documenttype 文档类型是 html 这是html5的声明头 告诉浏览器以哪种类型来调用哪个解析器核心来解析html 
+
+1.DOCTYPE和浏览器渲染模式
+	DOCTYPE，或者称为 Document Type Declaration（文档类型声明，缩写 DTD）
+	通常情况下，DOCTYPE 位于一个 HTML 文档的最前面的位置，位于根元素 HTML 的起始标签之前。
+	因为浏览器必须在解析 HTML 文档正文之前就确定当前文档的类型，以决定其需要采用的渲染模式，
+	不同的渲染模式会影响到浏览器对于 CSS 代码甚至 JavaScript 脚本的解析
+	怪异模式:
+	严格模式:
+-->
 <!DOCTYPE html>
 <!-- html代码书写的主框架 lang 是国际化的语言 默认是英文的 帮助翻译工具确定要使用的翻译规则-->
 <html lang="en">
   <!-- head是头 -->
   <head>
-    <!-- meta 元数据配置 charset 是字符编码 -->
+    <!-- meta 元数据配置  charset 是字符编码 -->
     <meta charset="UTF-8" />
-    <!-- 网页的标题 -->
+    <!-- 网页的标题  搜索引擎可以根据title判断网页中的主要内容是什么 -->
     <title>document</title>
     <!-- 告诉以默认的哪一个ie浏览器的内核版本打开  一般是对于国产的双核浏览器来说的不如360浏览器 
     是IE8的专属标记，用来兼容其它低版本IE浏览器的，告诉IE8浏览器以哪个低版本的IE浏览器来渲染页面。-->
@@ -26,12 +35,15 @@
       name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
+      <!--页面3庙后自动跳转  页面注册后跳转到登录页面  页面重定向-->
+      <meta http-equiv="refresh" content="3;url=https://www.baidu.com" />
   </head>
   <body>
     <!-- html 的主要内容展示区域 -->
   </body>
 </html>
 ```
+
 
 ```html
 <!-- 这是早期的html4的文档声明的头 现在已经不推荐使用了-->
@@ -45,6 +57,12 @@
 元素之外，此类型等同于HTML4.01文档过渡定义类型，但可以使用框架。 1
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 ```
+
+![image-20201014152210178](_media/image-20201014152210178.png)
+
+> 激动官网的页面:元数据信息
+
+![image-20201014152308863](_media/image-20201014152308863.png)
 
 ## 2. 字符集合字符编码表
 
@@ -221,3 +239,10 @@ Chrome 浏览器是 google 旗下的浏览器。Chrome 浏览器至发布以来�
 > 现在的前端开发神器 也可以编辑其他的语言
 
 **Vscode 前端开发常用插件集合:**
+
+## 5. 文档
+
++ 离线文档
++ 在线文档
++ w3cschool
++ zeal文档工具
