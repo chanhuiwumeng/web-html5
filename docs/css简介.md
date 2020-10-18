@@ -16,7 +16,7 @@
 
 :slightly_smiling_face: 使用了css的效果
 
-![image-20201014142652228](_media/image-20201014142652228.png)
+<img src="_media/image-20201014142652228.png" width="300px">
 
 [css官方地址](https://www.w3.org/TR/)
 
@@ -867,6 +867,9 @@ div {
   + odd  奇数
   + even  偶数
 + :nth-last-child
++ :first-letter 第一个字母
++ :first-line第一行
++ :selection表示选中的内容
 + :nth-of-type
 + :nth-last-of-type
 + :first-child   父元素中的第一个子元素,必须包含在一个父元素中
@@ -1079,7 +1082,7 @@ div {
         color: green;
       }
 
-      /* 虽然我们说浏览器加载代码的顺序是从上到下，从左到右，但是权重大的选择器会被使用 */
+      /* 虽然我们说浏览器加载代码的顺序是从上到下，从左到右，但是权重大的选择器会被使用,(分组选择器是单独计算的,不包括在内) */
     </style>
   </head>
   <body>
@@ -1097,5 +1100,608 @@ div {
 
 ![image-20201015163347099](_media/image-20201015163347099.png)
 
+### 2.5 样式的继承
+
+> 样式的继承:我们要给一个元素设置样式也同时会应用到他的后代元素上
+>
+> 继承是发生在祖先和后代元素之间的
+>
+> 注意:并不是所有的样式都会被继承
+>
+> + 背景相关
+> + 布局相关
+> + ....
+
+![image-20201017145852016](_media/image-20201017145852s016.png)
+
 ## 3. Css盒子模型
 
+> 所谓盒子模型（Box Model）就是把HTML页面中的元素看作是一个矩形的盒子，也就是一个盛装内容的容器。每个矩形都由元素的**内容(content)、内边距（padding）、边框（border）和外边距（margin）**组成。
+>
+> 所有的文档元素（标签）都会生成一个矩形框，我们成为元素框（element box），它描述了一个文档元素再网页布局汇总所占的位置大小。因此，**每个盒子除了有自己大小和位置外，还影响着其他盒子的大小和位置。**
+
+![img](_media/dsdsdsdfrr.png)
+
+![img](_media/3247286891&fm=26&gp=0.jpg)
+
+### 3.1 边框(Border)
+
+> border 属性来定义盒子的边框，该属性包含3个子属性：
+>
+> + border-style(边框样式)
+>
+> + border-color(边框颜色)
+>
+> + border-width(边框宽度)
+> + border-radius 边框圆角
+> + border-imge 边框图片
+> + box-shandow 边框阴影
+
+边框分为四边，所以有了:
+
++ border-bottom 下边框 
++ border-top上边框
++ border-left 做边框
++ border-right 右边框
+
+1. **Border-style**
+
+边框样式定义边框的风格，常用的属性值有:
+
++ none  没有边框 忽略所有的边框宽度和样式，除非是border-image
++ solid 边框是实线
++ dashed 边框是虚线
++ dotted 边框为点线
++ double 边框是双实线
++ groove  3D凹槽轮廓线
++ outset 3D凸边轮廓
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>盒子模型</title>
+    <style>
+      div {
+        width: 300px;
+        height: 300px;
+        border-style: double;
+        border-color: red;
+        border-width: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>
+
+```
+
+2. **Border-color**
+3. **Border-width**
+
+![image-20201018100546410](_media/image-20201018100546410.png)
+
+4. **Border-radius**(边框圆角)
+
+> boder-radius:左上角 右上角 右下角 左下角
+>
+> + 取值:
+>   + 用长度值设置对象的圆角半径长度。不允许负值 
+>   + 用百分比设置对象的圆角半径长度。不允许负值
+>
+> - 水平半径：如果提供全部四个参数值，将按上左(top-left)、上右(top-right)、下右(bottom-right)、下左(bottom-left)的顺序作用于四个角。 
+> - 如果只提供一个，将用于全部的于四个角。 
+> - 如果提供两个，第一个用于上左(top-left)、下右(bottom-right)，第二个用于上右(top-right)、下左(bottom-left)。 
+> - 如果提供三个，第一个用于上左(top-left)，第二个用于上右(top-right)、下左(bottom-left)，第三个用于下右(bottom-right)。 
+> - 垂直半径也遵循以上4点。 
+
+![img](_media/1623059727&fm=26&gp=0.jpg)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>盒子模型</title>
+    <style>
+      div:last-child {
+        width: 300px;
+        height: 300px;
+        border-top: 5px solid green;
+        border-left: 5px dashed pink;
+        border-right: 5px double gold;
+        border-bottom: 10px groove blue;
+        border-radius: 10px 15px 20px 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>
+
+```
+
+5. **盒子阴影**
+
+> box-shandow: 阴影的水平偏移距离 阴影垂直偏移距离  阴影的模糊程度  阴影的颜色
+
+| 说明       |                                                              |
+| :--------- | ------------------------------------------------------------ |
+| *h-shadow* | 必需的。水平阴影的位置。允许负值                             |
+| *v-shadow* | 必需的。垂直阴影的位置。允许负值                             |
+| *blur*     | 可选。模糊距离                                               |
+| *spread*   | 可选。阴影的大小                                             |
+| *color*    | 可选。阴影的颜色。在[CSS颜色值](https://www.runoob.com/cssref/css_colors_legal.aspx)寻找颜色值的完整列表 |
+| inset      | 可选。从外层的阴影（开始时）改变阴影内侧阴影                 |
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>盒子模型</title>
+    <style>
+      div:first-child {
+        width: 300px;
+        height: 300px;
+        background: lawngreen;
+        box-shadow: 5px 5px 10px green;
+      }
+      div:last-child {
+        margin-top: 20px;
+        width: 300px;
+        height: 300px;
+        background: lightcoral;
+        box-shadow: 0px 0px 10px red inset;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <div></div>
+  </body>
+</html>
+
+```
+
+![image-20201018101744289](_media/image-20201018101744289.png)
+
+### 3.2 内边距(padding)
+
+> 内边距: 边框和内容之间的距离
+>
+> + 取值:
+>   + 长度指定 不允许负值
+>   + 百分比指定 参照with进行计算  不允许负值
+>
+> + 如果提供全部四个参数值，将按上、右、下、左的顺序作用于四边。 
+> + 如果只提供一个，将用于全部的四边。 
+> + 如果提供两个，第一个用于上、下，第二个用于左、右。 
+> + 如果提供三个，第一个用于上，第二个用于左、右，第三个用于下
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>盒子模型</title>
+    <style>
+      div {
+        width: 400px;
+        height: 300px;
+        border: 2px solid red;
+        padding: 20px;
+      }
+      p {
+        border: 1px solid green;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p>
+        样式表定义如何显示 HTML 元素，就像 HTML
+        中的字体标签和颜色属性所起的作用那样。样式通常保存在外部的 .css
+        文件中。我们只需要编辑一个简单的 CSS 文档就可以改变所有页面的布局和外观
+      </p>
+    </div>
+  </body>
+</html>
+
+```
+
+![image-20201018102602241](_media/image-20201018102602241.png)
+
+### 3.3 外边距
+
+> margin(外边距)属性定义元素周围的空间。
+>
+> + margin和padding一样也分为四个方向的空间
+>   + margin-top
+>   + margin-let
+>   + margin-bottm
+>   + margin-right
+>   + margin: 上 右 下 左  四个方向的外边距值
+
+| 值       | 说明                                        |
+| :------- | :------------------------------------------ |
+| auto     | 设置浏览器边距。 这样做的结果会依赖于浏览器 |
+| *length* | 定义一个固定的margin（使用像素，pt，em等）  |
+| *%*      | 定义一个使用百分比的边距                    |
+
+#### 3.3.1 **清除浏览器给元素添加的默认内外边距**
+
+> :exclamation:设置外边距通常会在元素之间进行"留白",留白的空间内通常不能放置其他元素
+>
+> 浏览器默认的body和窗口之间是有8px的留白距离。
+>
+> 通常在页面开发的时候我们要取消浏览器给元素添加的默认的外边距和内边距:
+>
+> *{
+>
+> margin:0;
+>
+> padding:0;
+>
+> }
+
+![image-20201018103434061](_media/image-20201018103434061.png)
+
+#### 3.3.2 **元素居中**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>盒子模型</title>
+    <style>
+      div {
+        width: 400px;
+        height: 300px;
+        border: 2px solid red;
+        padding: 20px;
+        margin: 0 auto; /*上下边距为0 左右自适应就会自动居中*/
+      }
+      p {
+        border: 1px solid green;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p>
+        样式表定义如何显示 HTML 元素，就像 HTML
+        中的字体标签和颜色属性所起的作用那样。样式通常保存在外部的 .css
+        文件中。我们只需要编辑一个简单的 CSS 文档就可以改变所有页面的布局和外观
+      </p>
+    </div>
+  </body>
+</html>
+
+```
+
+![image-20201018103849393](_media/image-20201018103849393.png)
+
+#### 3.3.3 **外边距合并**
+
+> 使用margin定义块元素的垂直外边距时，可能会出现外边距的合并
+
+1. **相邻元素垂直方向的外边距合并**
+
+> 当上下相邻的两个块元素相遇时，如果上面的元素有下外边距margin-bottom，下面的元素有上外边距margin-top，则他们之间的垂直间距不是margin-bottom与margin-top之和，而是两者中的较大者。这种现象被称为相邻块元素垂直外边距的合并（也称外边距塌陷）。
+
+![img](_media/klshdahsd.png)
+
+> 解决方案: 可以直接改变其中一个的外边距的值，使之达到想要的效果。(推荐使用)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>盒子模型</title>
+    <style>
+      div:first-child {
+        width: 200px;
+        height: 100px;
+        border: 2px solid red;
+        margin-bottom: 20px;
+      }
+      div:last-child {
+        width: 200px;
+        height: 100px;
+        border: 1px solid green;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <div></div>
+  </body>
+</html>
+
+```
+
+![image-20201018104601138](_media/image-20201018104601138.png)
+
+2. **嵌套块元素垂直外边距的合并**
+
+> 就是垂直方向的margin不但会合并; 当父元素没有设置内边距或边框,以及触发BFC时,如果子元素的值大于父元素时，它会带着父元素一起偏移,此时子元素是相对除了它父级之外的离它最近的元素偏移的：
+>
+> 通俗讲就是:对于两个嵌套关系的块元素，如果父元素没有上内边距及边框，则父元素的上外边距会与子元素的上外边距发生合并，合并后的外边距为两者中的较大者，即使父元素的上外边距为0，也会发生合并。
+
+![margin1](_media/201212072104421699.gif)
+
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>盒子模型</title>
+    <style>
+      div {
+        width: 400px;
+        height: 300px;
+        border-top: none;
+        border-left: 2px solid red;
+        border-bottom: 2px solid red;
+        border-right: 2px solid red;
+        margin-top: 20px;
+      }
+      p {
+        margin-top: 30px;
+        border: 2px solid green;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p>
+        外边距合并指的是，当两个垂直外边距相遇时，它们将形成一个外边距。
+        合并后的外边距的高度等于两个发生合并的外边距的高度中的较大者
+      </p>
+    </div>
+  </body>
+</html>
+
+
+```
+
+![image-20201018105900959](_media/image-20201018105900959.png)
+
+> 解决方案:
+>
+> + 可以通过给父元素添加边框或内边距.(不建议使用,会破坏布局)
+>
+> + 使用BFC解决: 将父元素的渲染模式改为BFC渲染模式.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>盒子模型</title>
+    <style>
+      div {
+        width: 400px;
+        height: 300px;
+        border-top: none;
+        border-left: 2px solid red;
+        border-bottom: 2px solid red;
+        border-right: 2px solid red;
+        margin-top: 20px;
+        overflow: hidden;
+      }
+      p {
+        margin-top: 30px;
+        border: 2px solid green;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p>
+        外边距合并指的是，当两个垂直外边距相遇时，它们将形成一个外边距。
+        合并后的外边距的高度等于两个发生合并的外边距的高度中的较大者
+      </p>
+    </div>
+  </body>
+</html>
+
+```
+
+
+
+![image-20201018105958936](_media/image-20201018105958936.png)
+
+#### 3.3.4 BFC是什么,如何触发BFC
+
+##### FC
+
+Formatting context(格式化上下文)是W3C 规范中的一个概念.
+它是页面中的一块渲染区域,并且有一套渲染规则,它决定了其子元素如何定位,以及和其他元素的关系和相互作用.
+
+**BFC**
+
+BFC 即 Block Formatting Contexts (块级格式化上下文)，它属于上述定位方案的普通流。
+
+具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且 BFC 具有普通容器所没有的一些特性。
+
+通俗一点来讲，可以把 BFC 理解为一个封闭的大箱子，箱子内部的元素无论如何翻江倒海，都不会影响到外部。
+
+##### 触发BFC
+
+只要满足以下任意一条件,将会触发BFC.
+
+- body根元素
+- 浮动元素：float：除none以为的值
+- 绝对定位元素：position：absolute/fixed
+- display：inline-block/table-cells/flex
+- overflow：除了visible以外的值（hidden/auto/scroll)
+
+### 3.4 内容
+
+> 使用宽度属性width和高度属性height可以对盒子的大小进行控制。
+>
+> width和height的属性值可以为不同单位的数值或相对于父元素的百分比%，实际工作中最常用的是像素值。
+>
+> 大多数浏览器，如Firefox、IE6及以上版本都采用了W3C规范，符合CSS规范的盒子模型的总宽度和总高度的计算原则是：
+>
+> ​	/\*外盒尺寸计算（元素空间尺寸）\*/
+>   Element空间高度 = content height + padding + border + margin
+>   Element 空间宽度 = content width + padding + border + margin
+>   /\*内盒尺寸计算（元素实际大小）\*/
+>   Element Height = content height + padding + border （Height为内容高度）
+>   Element Width = content width + padding + border （Width为内容宽度）
+>
+> **注意:**
+>
+> 1、宽度属性width和高度属性height仅适用于块级元素，对行内元素无效（ img 标签和 input除外）。
+>
+> 2、计算盒子模型的总高度时，还应考虑上下两个盒子垂直外边距合并的情况。
+>
+> 3、**如果一个盒子没有给定宽度/高度或者继承父亲的宽度/高度，则padding 不会影响本盒子大小**。
+
+![image-20201018110459759](_media/image-20201018110459759.png)
+
+### 3.5盒子模型布局稳定性
+
+开始学习盒子模型，同学们最大的困惑就是， 分不清内外边距的使用，什么情况下使用内边距，什么情况下使用外边距？
+
+答案是：  其实他们大部分情况下是可以混用的。  就是说，你用内边距也可以，用外边距也可以。 你觉得哪个方便，就用哪个。
+
+但是，总有一个最好用的吧，我们根据稳定性来分，建议如下：
+
+按照 优先使用  宽度 （width）  其次 使用内边距（padding）    再次  外边距（margin）。   
+
+```
+  width >  padding  >   margin   
+```
+
+原因：
+
+1. margin 会有外边距合并 还有 ie6下面margin 加倍的bug（讨厌）所以最后使用。
+
+2. padding  会影响盒子大小， 需要进行加减计算（麻烦） 其次使用。
+
+3. width   没有问题（嗨皮）我们经常使用宽度剩余法 高度剩余法来做。
+
+### 3.6 Css3的盒子模型
+
+> CSS3中可以通过box-sizing 来指定盒模型，即可指定为content-box、border-box，这样我们计算盒子大小的方式就发生了改变
+>
+> - content-box： 
+>
+>   padding和border不被包含在定义的width和height之内。对象的实际宽度等于设置的width值和border、padding之和，即 (  Element width = width + border + padding ) 
+>
+>   此属性表现为标准模式下的盒模型。 
+>
+> - border-box： 
+>
+>   padding和border被包含在定义的width和height之内。对象的实际宽度就等于设置的width值，即使定义有border和padding也不会改变对象的实际宽度，即  ( Element width = width ) 
+>
+>   此属性表现为怪异模式下的盒模型。 
+
+| content-box | 这是 CSS2.1 指定的宽度和高度的行为。指定元素的宽度和高度（最小/最大属性）适用于box的宽度和高度。元素的填充和边框布局和绘制指定宽度和高度除外 |
+| ----------- | ------------------------------------------------------------ |
+| border-box  | 指定宽度和高度（最小/最大属性）确定元素边框。也就是说，对元素指定宽度和高度包括了 padding 和 border 。通过从已设定的宽度和高度分别减去边框和内边距才能得到内容的宽度和高度。 |
+| inherit     | 指定 box-sizing 属性的值，应该从父元素继承                   |
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>盒子模型</title>
+    <style>
+      div {
+        width: 400px;
+        height: 300px;
+        border-top: none;
+        border-left: 2px solid red;
+        border-bottom: 2px solid red;
+        border-right: 2px solid red;
+        margin-top: 20px;
+        overflow: hidden; /**/
+        /* 盒子大小为 width + padding + border   content-box:此值为其默认值，其让元素维持W3C的标准Box Mode */
+        box-sizing: content-box;
+          
+      }
+      p {
+        margin-top: 30px;
+        border: 2px solid green;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p>
+        外边距合并指的是，当两个垂直外边距相遇时，它们将形成一个外边距。
+        合并后的外边距的高度等于两个发生合并的外边距的高度中的较大者
+      </p>
+    </div>
+  </body>
+</html>
+
+```
+
+![image-20201018111151867](_media/image-20201018111151867.png)
+
+```java
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>盒子模型</title>
+    <style>
+      div {
+        width: 400px;
+        height: 300px;
+        border-top: none;
+        border-left: 2px solid red;
+        border-bottom: 2px solid red;
+        border-right: 2px solid red;
+        margin-top: 20px;
+        overflow: hidden; /**/
+        /*盒子自身的大小维持不变，里面的内容自动调整*/
+        box-sizing: border-box;
+      }
+      p {
+        margin-top: 30px;
+        border: 2px solid green;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p>
+        外边距合并指的是，当两个垂直外边距相遇时，它们将形成一个外边距。
+        合并后的外边距的高度等于两个发生合并的外边距的高度中的较大者
+      </p>
+    </div>
+  </body>
+</html>
+
+```
+
+![image-20201018111300839](_media/image-20201018111300839.png)
