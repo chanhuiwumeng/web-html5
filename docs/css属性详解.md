@@ -1243,6 +1243,8 @@
 ### 4.3 精灵图
 
 > CSS雪碧 即[CSS Sprite](https://baike.baidu.com/item/CSS Sprite)，也有人叫它CSS精灵，是一种CSS图像合并技术，该方法是将小图标和背景图像合并到一张图片上，然后利用css的背景定位来显示需要显示的图片部分。
+>
+> 一个网页中往往会应用很多小的背景图像作为修饰，当网页中的图像过多时，服务器就会频繁地接受和发送请求，这将大大降低页面的加载速度。为了有效地减少服务器接受和发送请求的次数，提高页面的加载速度，出现了CSS精灵技术（也称CSS Sprites、CSS雪碧）。
 
 ![index_icon](_media/index_icon.png)
 
@@ -1277,19 +1279,880 @@
 
 ## 5. 文字和文本
 
+### 5.1 font字体
+
++ font -style 字体样式
++ font-weight  字重
++ font-size  字体大小
++ font-family  字体名称
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <title>字体</title>
+    <meta
+      name="author"
+      content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com"
+    />
+    <style>
+      p {
+        /*字体颜色*/
+        color: lawngreen;
+        font-weight: 500;
+        font-size: 20px;
+        /*字体名称可以使用中文，但是建议使用英文名称*/
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      “彝人制造”组建于1995年，三位小伙子都是土生土长的彝族人。
+      曲比哈布是乐队主创及灵魂人物，曲比哈日是哈布的弟弟，
+      倮伍阿木曾在济南当过兵，在西昌和曲比兄弟相识后便有了现在的乐队。
+    </p>
+  </body>
+</html>
+
+```
+
+![image-20201019202241662](_media/image-20201019202241662.png)
+
+### 5.2 文本
+
++ white-space  设置或检索对象内空格的处理方式。
++ word-break 设置或检索对象内文本的字内换行行为。
++ text-algin  文字水平居中
+  + left  左对齐
+  + right 右对齐
+  + center 居中
++ text-indent 文字缩进
+  + 段落文字首字母或者文字缩进两个字符或者文字大小
++ line-height 行高
+  + 一般情况下为了解决文字在行内的垂直居中
+  + 一般情况下，行距比字号大7.8像素左右就可以了。
++ letter-spacing 行间距
++ word-spacing 单词间距
+  + 该属性将指定的间隔添加到每个单词(词内不发生)之后，但最后一个字将被排除在外。 
+  + 判断是否为单词的依据是单词间是否有空格。 
+
+> word-spacing和letter-spacing均可对英文进行设置。不同的是letter-spacing定义的为字母之间的间距，而word-spacing定义的为英文单词之间的间距
+
+```HTML
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <title>字体文本</title>
+    <meta
+      name="author"
+      content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com"
+    />
+    <style>
+      p {
+        width: 400px;
+        height: 200px;
+        border: 1px solid red;
+        padding: 10px;
+        /*字体颜色*/
+        color: lawngreen;
+        font-weight: 500;
+        font-size: 20px;
+        /*字体名称可以使用中文，但是建议使用英文名称*/
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+        line-height: 30px;
+        letter-spacing: 10px;
+        word-spacing: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      “彝人制造”组建于1995年，三位小伙子都是土生土长的彝族人。
+      曲比哈布是乐队主创及灵魂人物，曲比哈日是哈布的弟弟，
+      倮伍阿木曾在济南当过兵，在西昌和曲比兄弟相识后便有了现在的乐队。
+    </p>
+  </body>
+</html>
+
+```
+
+![image-20201019203505447](_media/image-20201019203505447.png)
+
+### 5.3 text-shandow (文字阴影)
+
+> text-shandow: 阴影水平偏移 阴影垂直偏移  阴影模糊程度  阴影的颜色;
+>
+> - 可以设定多组效果，每组参数值以逗号分隔。多组阴影特殊效果
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <title>文字阴影</title>
+    <meta
+      name="author"
+      content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com"
+    />
+    <style>
+      p {
+        /*字体颜色*/
+        color: lawngreen;
+        font-size: 30px;
+        text-shadow: 0px 0px 10px green;
+      }
+    </style>
+  </head>
+  <body>
+    <p>“彝人制造”组建于1995年，三位小伙子都是土生土长的彝族人。</p>
+  </body>
+</html>
+
+```
+
+![image-20201019204152136](_media/image-20201019204152136.png)
+
+### 5.4 凹凸文字
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <title>凹凸文字</title>
+    <meta
+      name="author"
+      content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com"
+    />
+    <style>
+      body {
+        background-color: #ccc;
+      }
+      p {
+        color: #ccc;
+        font: 700 80px '微软雅黑';
+      }
+      p:first-child {
+        text-shadow: 1px 1px 1px #000, -1px -1px 1px #fff;
+      }
+      p:last-child {
+        text-shadow: -1px -1px 1px #000, 1px 1px 1px #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <p>“彝人制造”组建于1995年，三位小伙子都是土生土长的彝族人。</p>
+    <p>“彝人制造”组建于1995年，三位小伙子都是土生土长的彝族人。</p>
+  </body>
+</html>
+
+```
+
+![image-20201019204547511](_media/image-20201019204547511.png)
+
+### 5.5 火焰文字
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <title>火焰文字</title>
+    <meta
+      name="author"
+      content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com"
+    />
+    <style>
+      #fire {
+        text-align: center;
+        margin: 100px auto;
+        font-family: 'Comic Sans MS';
+        font-size: 80px;
+        color: white;
+        text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85,
+          -20px -20px 40px #ffae34, 20px -40px 50px #ec760c,
+          -20px -60px 60px #cd4606, 0 -80px 70px #973716,
+          10px -90px 80px #451b0e;
+      }
+
+      body {
+        background: black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="fire">Html5 Css3</h1>
+  </body>
+</html>
+
+```
+
+![image-20201019205048681](_media/image-20201019205048681.png)
+
 ## 6. 过渡
+
+> 我们为了添加某种效果可以从一种样式转变到另一个的时候，无需使用Flash动画或JavaScript。
+
+| 属性                                                         | 描述                                         | CSS  |
+| :----------------------------------------------------------- | :------------------------------------------- | :--- |
+| [transition](https://www.runoob.com/cssref/css3-pr-transition.html) | 简写属性，用于在一个属性中设置四个过渡属性。 | 3    |
+| [transition-property](https://www.runoob.com/cssref/css3-pr-transition-property.html) | 规定应用过渡的 CSS 属性的名称。              | 3    |
+| [transition-duration](https://www.runoob.com/cssref/css3-pr-transition-duration.html) | 定义过渡效果花费的时间。默认是 0。           | 3    |
+| [transition-timing-function](https://www.runoob.com/cssref/css3-pr-transition-timing-function.html) | 规定过渡效果的时间曲线。默认是 "ease"。      | 3    |
+| [transition-delay](https://www.runoob.com/cssref/css3-pr-transition-delay.html) | 规定过渡效果何时开始。默认是 0。             | 3    |
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta
+      name="author"
+      content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com"
+    />
+    <style>
+      #fire {
+        text-align: center;
+        margin: 100px auto;
+        font-family: 'Comic Sans MS';
+        font-size: 80px;
+        color: white;
+        text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85,
+          -20px -20px 40px #ffae34, 20px -40px 50px #ec760c,
+          -20px -60px 60px #cd4606, 0 -80px 70px #973716,
+          10px -90px 80px #451b0e;
+        transition: all  5s;
+      }
+
+      body {
+        background: black;
+      }
+      #fire:hover {
+        text-shadow: 0 0 20px #451b0e, 10px -10px 30px #973716,
+          -20px -20px 40px #cd4606, 20px -40px 50px #ec760c,
+          -20px -60px 60px #ec760c, 0 -80px 70px #feec85,
+          10px -90px 80px #fefcc9;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="fire">Html5 Css3</h1>
+  </body>
+</html>
+
+```
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta
+      name="author"
+      content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com"
+    />
+    <style>
+      #fire {
+        text-align: center;
+        margin: 100px auto;
+        font-family: 'Comic Sans MS';
+        font-size: 80px;
+        color: white;
+        text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85,
+          -20px -20px 40px #ffae34, 20px -40px 50px #ec760c,
+          -20px -60px 60px #cd4606, 0 -80px 70px #973716,
+          10px -90px 80px #451b0e;
+          /*过渡的属性值  过度持续时间 过渡的动画方式  延迟时间*/
+          transition: all 5s ease-in  2s;
+      }
+
+      body {
+        background: black;
+      }
+      #fire:hover {
+        transform: rotateY(360deg);
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="fire">Html5 Css3</h1>
+  </body>
+</html>
+
+```
+
+
 
 ## 7. 转换
 
+> 向元素应用2D或3D转换。该属性允许我们对元素进行**旋转、缩放、移动、或者倾斜**
+
+| Property                                                     | 描述                   | CSS  |
+| :----------------------------------------------------------- | :--------------------- | :--- |
+| [transform](https://www.runoob.com/cssref/css3-pr-transform.html) | 适用于2D或3D转换的元素 | 3    |
+| [transform-origin](https://www.runoob.com/cssref/css3-pr-transform-origin.html) | 允许您更改转化元素位置 | 3    |
+
+###  7.1 2D 转换方法
+
+| 函数                            | 描述                                     |
+| :------------------------------ | :--------------------------------------- |
+| matrix(*n*,*n*,*n*,*n*,*n*,*n*) | 定义 2D 转换，使用六个值的矩阵。         |
+| translate(*x*,*y*)              | 定义 2D 转换，沿着 X 和 Y 轴移动元素。   |
+| translateX(*n*)                 | 定义 2D 转换，沿着 X 轴移动元素。        |
+| translateY(*n*)                 | 定义 2D 转换，沿着 Y 轴移动元素。        |
+| scale(*x*,*y*)                  | 定义 2D 缩放转换，改变元素的宽度和高度。 |
+| scaleX(*n*)                     | 定义 2D 缩放转换，改变元素的宽度。       |
+| scaleY(*n*)                     | 定义 2D 缩放转换，改变元素的高度。       |
+| rotate(*angle*)                 | 定义 2D 旋转，在参数中规定角度。         |
+| skew(*x-angle*,*y-angle*)       | 定义 2D 倾斜转换，沿着 X 和 Y 轴。       |
+| skewX(*angle*)                  | 定义 2D 倾斜转换，沿着 X 轴。            |
+| skewY(*angle*)                  | 定义 2D 倾斜转换，沿着 Y 轴。            |
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta
+      name="author"
+      content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com"
+    />
+    <style>
+      .fire {
+        text-align: center;
+        margin: 100px auto;
+        font-family: 'Comic Sans MS';
+        font-size: 80px;
+        color: white;
+        text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85,
+          -20px -20px 40px #ffae34, 20px -40px 50px #ec760c,
+          -20px -60px 60px #cd4606, 0 -80px 70px #973716,
+          10px -90px 80px #451b0e;
+        transition: all 5s ease-in;
+      }
+
+      body {
+        background: black;
+      }
+      /* 旋转  deg是角度单位 */
+      .fire:first-child:hover {
+        transform: rotateY(360deg);
+      }
+      /* 水平x轴移动 */
+      .fire:nth-child(2):hover {
+        transform: translateX(200px);
+      }
+      /* 放大或者缩小 */
+      .fire:nth-child(3):hover {
+        transform: scale(1.2);
+      }
+      /* 扭曲  x轴和y轴一定的方向*/
+      .fire:nth-child(4):hover {
+        transform: skew(30deg, 30deg);
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="fire">Html5 Css3</h1>
+    <h1 class="fire">Html5 Css3</h1>
+    <h1 class="fire">Html5 Css3</h1>
+    <h1 class="fire">Html5 Css3</h1>
+  </body>
+</html>
+
+```
+
+![](_media/GIF3.gif)
+
+### 7.2 3D转换
+
+> 要利用 CSS3 实现 3D 的效果，最主要的就是借助 transform-style 属性。transform-style 只有两个值可以选择：
+>
+> + transform-style: flat; ``// 默认，子元素将不保留其 3D 位置
+> + transform-style: preserve-3d; ``// 子元素将保留其 3D 位置。
+
+![img](_media/608782-20160420204327070-2018617361.jpg)
+
+![](./_media/GIF4.gif)
+
+
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta
+      name="author"
+      content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        box-sizing: border-box;
+      }
+      .container {
+        width: 300px;
+        height: 300px;
+        margin: 200px auto;
+      }
+      .box {
+        /* 指定观察者与「z=0」平面的距离，使具有三维位置变换的元素产生透视效果。
+          「z>0」的三维元素比正常大，而「z<0」时则比正常小，大小程度由该属性的值决定。
+         */
+        perspective: 600px;
+        position: relative;
+      }
+      .content {
+        width: 300px;
+        height: 300px;
+        transform-style: preserve-3d;
+        animation: run 10s infinite;
+      }
+      .content div {
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        text-align: center;
+        line-height: 300px;
+        font-size: 32px;
+      }
+      .front {
+        transform: translateZ(100px);
+        background-color: rgba(36, 85, 75, 0.5);
+      }
+      .back {
+        transform: translateZ(-100px) rotateY(180deg);
+        background-color: rgba(36, 255, 1, 0.5);
+      }
+      .left {
+        left: -100px;
+        transform: rotateY(-90deg);
+        background-color: rgba(25, 62, 75, 0.5);
+      }
+      .right {
+        left: 100px;
+        transform: rotateY(90deg);
+        background-color: rgba(25, 62, 75, 0.5);
+      }
+      .top {
+        top: -100px;
+        transform: rotateX(90deg);
+        background-color: rgba(255, 62, 26, 0.5);
+      }
+      .bottom {
+        top: 100px;
+        transform: rotateX(-90deg);
+        background-color: rgba(255, 62, 26, 0.5);
+      }
+      @keyframes run {
+        0% {
+          transform: rotateY(0);
+        }
+        10% {
+          transform: rotateY(180deg);
+        }
+        20% {
+          transform: rotateX(180deg);
+          transform: rotateY(180deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        <div class="content">
+          <div class="front">front</div>
+          <div class="back">back</div>
+          <div class="left">left</div>
+          <div class="right">right</div>
+          <div class="top">top</div>
+          <div class="bottom">bottom</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+```
+
+![](./_media/GIF5.gif)
+
+![img](_media/608782-20160420200745726-1099998183.gif)
+
 ## 8. 动画
 
-## 9 .Css练习项目
+> CSS3 可以创建动画，它可以取代许多网页动画图像、Flash 动画和 JavaScript 实现的效果。
+
+下面的表格列出了 @keyframes 规则和所有动画属性：
+
+| 属性                                                         | 描述                                                         | CSS  |
+| :----------------------------------------------------------- | :----------------------------------------------------------- | :--- |
+| [@keyframes](https://www.runoob.com/cssref/css3-pr-animation-keyframes.html) | 规定动画。                                                   | 3    |
+| [animation](https://www.runoob.com/cssref/css3-pr-animation.html) | 所有动画属性的简写属性。                                     | 3    |
+| [animation-name](https://www.runoob.com/cssref/css3-pr-animation-name.html) | 规定 @keyframes 动画的名称。                                 | 3    |
+| [animation-duration](https://www.runoob.com/cssref/css3-pr-animation-duration.html) | 规定动画完成一个周期所花费的秒或毫秒。默认是 0。             | 3    |
+| [animation-timing-function](https://www.runoob.com/cssref/css3-pr-animation-timing-function.html) | 规定动画的速度曲线。默认是 "ease"。                          | 3    |
+| [animation-fill-mode](https://www.runoob.com/cssref/css3-pr-animation-fill-mode.html) | 规定当动画不播放时（当动画完成时，或当动画有一个延迟未开始播放时），要应用到元素的样式。 | 3    |
+| [animation-delay](https://www.runoob.com/cssref/css3-pr-animation-delay.html) | 规定动画何时开始。默认是 0。                                 | 3    |
+| [animation-iteration-count](https://www.runoob.com/cssref/css3-pr-animation-iteration-count.html) | 规定动画被播放的次数。默认是 1。                             | 3    |
+| [animation-direction](https://www.runoob.com/cssref/css3-pr-animation-direction.html) | 规定动画是否在下一周期逆向地播放。默认是 "normal"。          | 3    |
+| [animation-play-state](https://www.runoob.com/cssref/css3-pr-animation-play-state.html) | 规定动画是否正在运行或暂停。默认是 "running"。               | 3    |
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta
+      name="author"
+      content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        box-sizing: border-box;
+      }
+      .container {
+        width: 300px;
+        height: 300px;
+        margin: 200px auto;
+        background-color: lightcoral;
+        /* 动画名称 动画持续时间 动画播放方式 循环方式(无限循环) */
+        animation: run 5s ease infinite;
+      }
+
+      @keyframes run {
+        0% {
+          transform: rotateY(0);
+        }
+        10% {
+          transform: rotateY(180deg);
+        }
+        20% {
+          transform: rotateX(180deg);
+          transform: rotateY(180deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container"></div>
+  </body>
+</html>
+
+```
+
+> 常用的css3动画库:
+>
+> [animates.css](https://daneden.github.io/animate.css/)
+>
+> [magic.css](https://github.com/miniMAC/magic)
+>
+> [Effect.css ](https://1stwebdesigner.com/css-effects/)
+>
+> [hover.css ](http://ianlunn.github.io/Hover/)
+
+## 9 .Css补充知识
+
+### 9.1 鼠标样式
+
+```html
+<ul>
+  <li style="cursor:default">我是小白</li>
+  <li style="cursor:pointer">我是小手</li>
+  <li style="cursor:move">我是移动</li>
+  <li style="cursor:text">我是文本</li>
+</ul>
+```
+
+### 9.2outline(轮廓线)
+
+> 在input元素中浏览器默认会添加外部的轮廓线 我们是不需要的，一般情况下去掉就可以了
+
+```html
+<input  type="text"  style="outline: 0;"/>
+<input  type="text"  style="outline: none;"/>
+```
+
+### 9.3 文本拖拽
+
+> 文本域我们一般设定好大小以后就不允许拖拽改变大小
+
+```html
+<textarea  style="resize: none;"></textarea>
+```
+
+### 9.4 vertical-align 垂直对齐
+
+> 以前我们讲过让带有宽度的块级元素居中对齐，是margin: 0 auto;
+>
+> 以前我们还讲过让文字居中对齐，是 text-align: center;
+>
+> 但是我们从来没有讲过有垂直居中的属性， 我们的妈妈一直很担心我们的垂直居中怎么做。
+>
+> vertical-align 垂直对齐， 这个看上去很美好的一个属性， 实际有着不可捉摸的脾气，否则我们也不会这么晚来讲解。
+>
+> vertical-align 不影响块级元素中的内容对齐，它只针对于 行内元素或者行内块元素，特别是行内块元素， **通常用来控制图片/表单与文字的对齐**。
+>
+> 所以我们知道，我们可以通过vertical-align 控制图片和文字的垂直关系了。 默认的图片会和文字基线对齐
+
+![img](_media/timgasasas.png)
 
 
+
+![image-20201019214152891](_media/image-20201019214152891.png)
+
+### 9.5 去除图片底部空白
+
+> 有个很重要特性你要记住： 图片或者表单等行内块元素，他的底线会和父级盒子的基线对齐。这样会造成一个问题，就是图片底侧会有一个空白缝隙。
+
+![image-20201019215637550](_media/image-20201019215637550.png)
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta
+      name="author"
+      content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com"
+    />
+    <style>
+        /* 去除间隙有三种方式:
+        1. 图片变为block块级元素
+        2. vertical-align: top | middle | bottom;
+        3. 把父级的字体大小设置为0px
+        
+        */
+     .container {
+        width: 500px;
+        height: 400px;
+        margin: 0 auto;
+        display: inline-block;
+        border: 1px solid red;
+        background: lawngreen;
+        font-size: 0;
+      }
+      img {
+        /* display: block; */
+        /* vertical-align: middle; */
+      }
+      span {
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img src="../images/1.jpg" alt="" />
+      <span>hello world</span>
+    </div>
+  </body>
+</html>
+
+```
+
+**去除间隙后的效果**
+
+![image-20201019215732341](_media/image-20201019215732341.png)
+
+### 9.6 字体库
+
+> 引入第三方的字体库 :
+>
+> [站长字体](http://font.chinaz.com/)
+>
+> [第一字体库](http://www.diyiziti.com/List)
+
+![image-20201019220802393](_media/image-20201019220802393.png)
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta
+      name="author"
+      content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com"
+    />
+    <style>
+      @font-face {
+          /*第三方字体库起别名*/
+        font-family: 'di';
+          /*下载的第三方的字体库*/
+        src: url('../毛笔行书繁7.ttf');
+      }
+      p {
+        font-family: 'di';
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      层叠样式表(英文全称：Cascading Style
+      Sheets)是一种用来表现HTML（标准通用标记语言的一个应用）或XML（标准通用标记语言的一个子集）等文件样式的计算机语言
+    </p>
+  </body>
+</html>
+
+```
+
+![image-20201019221223431](_media/image-20201019221223431.png)
+
+### 9.7 字体图标(icon)
+
+> 图片是有诸多优点的，但是缺点很明显，比如图片不但增加了总文件的大小，还增加了很多额外的"http请求"，这都会大大降低网页的性能的。更重要的是图片不能很好的进行“缩放”，因为图片放大和缩小会失真。 我们后面会学习移动端响应式，很多情况下希望我们的图标是可以缩放的。此时，一个非常重要的技术出现了，额不是出现了，是以前就有，是被从新"宠幸"啦。。 这就是字体图标（iconfont).
+>
+> 正如你所看到的，现在市面上大多数网页使用的图标都是类似这样的形式，也有不少icon图标库可供我们使用
+>  它的实现方式有：
+>
+> - image
+> - CSS Sprites
+> - Icon Font
+> - SVG（目前来看，是最完美的）
+> - CSS手写icon（太麻烦，而且自己做往往不好看（这时候你需要一个UI小姐姐的帮助））
+>
+> **字体图标的优点**
+>
+> 1. 可以做出跟图片一样可以做的事情,改变透明度、旋转度，等..
+> 2. 但是本质其实是文字，可以很随意的改变颜色、产生阴影、透明效果等等...
+> 3. 本身体积更小，但携带的信息并没有削减。
+> 4. 几乎支持所有的浏览器5移动端设备必备良药...
+
+![image-20201019221442400](_media/image-20201019221442400.png)
+
+假如图标是我们公司单独设计，那就需要第一步了，这个属于UI设计人员的工作， 他们在 illustrator 或 Sketch 这类矢量图形软件里创建 icon图标，在保存为svg格式我们就可以去使用了， 比如下图：
+
+![img](_media/8496567-2d63ebf8fa2fca0a.jpg)
+
+#### 常用的第三方的字体图标库
+
+easyicon[https://www.easyicon.net/](https://www.easyicon.net/)最好用的图标搜索网站。真的是你能想到的都能搜索到，最重要的一点就是，你如果在输入框输入中文，他会立马帮你翻译成英文搜索。牛惹
+
+**icomoon字库** [http://icomoon.io](http://icomoon.io)
+
+**阿里icon font字库** [ http://www.iconfont.cn/](http://www.iconfont.cn/)
+
+**fontello** [https://fontello.com/](https://fontello.com/)
+
+Font-Awesome [http://www.fontawesome.com.cn/faicons/](http://www.fontawesome.com.cn/faicons/)
+
+icons8  [[https://icons8.com/](https://icons8.com/)]([https://icons8.com/](https://icons8.com/))
+
+bootstrap字库
+
+layui图标库
+
+天气图标字库 [http://erikflowers.github.io/weather-icons/](http://erikflowers.github.io/weather-icons/)
+
+[http://ecomfe.github.io/fontmin/](http://ecomfe.github.io/fontmin/) 【百度开发】第一个纯 JavaScript 字体子集化方案。百度最近在开发领域还是非常突出的，连续推出了很多js应用都获得了好评。这个应该算是一个新的概念，百度刚刚捣鼓出来。
+
+**Font-Awesome使用方式**
+
+![image-20201019223249318](_media/image-20201019223249318.png)
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <title>字体图标库</title>
+
+    <link
+      rel="stylesheet"
+      href="../font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      i {
+        color: lightcoral;
+      }
+    </style>
+  </head>
+  <body>
+    <i class="fa fa-address-book-o fa-2x"></i>
+    <i class="fa fa-backward fa-2x"></i>
+    <i class="fa fa-percent fa-2x"></i>
+    <i class="fa fa-phone fa-2x"></i>
+  </body>
+</html>
+
+```
+
+![image-20201019224020847](_media/image-20201019224020847.png)
+
+**IconMoon使用:**
 
 ## 10 . Flex伸缩盒
 
+阮一峰的网络日志  flex布局[http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
 
+![img](_media/bg2015071001.gif)
+
+> 布局的传统解决方案，基于[盒状模型](https://developer.mozilla.org/en-US/docs/Web/CSS/box_model)，依赖 [`display`](https://developer.mozilla.org/en-US/docs/Web/CSS/display) 属性 + [`position`](https://developer.mozilla.org/en-US/docs/Web/CSS/position)属性 + [`float`](https://developer.mozilla.org/en-US/docs/Web/CSS/float)属性。它对于那些特殊布局非常不方便，比如，[垂直居中](https://css-tricks.com/centering-css-complete-guide/)就不容易实现。
+>
+> 2009年，W3C 提出了一种新的方案----Flex 布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。
+>
+> Flex 是 Flexible Box 的缩写，意为"弹性布局"，用来为盒状模型提供最大的灵活性。
+>
+> 任何一个容器都可以指定为 Flex 布局。
+>
+> div{
+>
+> ​	display:flex | line-flext;
+>
+> }
+
+### 10.1 基本概念
+
+> 采用 Flex 布局的元素，称为 Flex 容器（flex container），简称"容器"。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称"项目"。
+>
+> 容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做`main start`，结束位置叫做`main end`；交叉轴的开始位置叫做`cross start`，结束位置叫做`cross end`。
+>
+> 项目默认沿主轴排列。单个项目占据的主轴空间叫做`main size`，占据的交叉轴空间叫做`cross size`。
+
+![img](_media/bg2015071004.png)
+
+### 10.2 容器的属性
+
+> .box {
+> 		flex-direction: row | row-reverse | column | column-reverse;
+>   }
+
+![img](_media/bg2015071005.png)
+
+- `row`（默认值）：主轴为水平方向，起点在左端。
+- `row-reverse`：主轴为水平方向，起点在右端。
+- `column`：主轴为垂直方向，起点在上沿。
+- `column-reverse`：主轴为垂直方向，起点在下沿。
+
+### 10.3 flex-wrap
+
+> 默认情况下，项目都排在一条线（又称"轴线"）上。`flex-wrap`属性定义，如果一条轴线排不下，如何换行
+>
+> ```css
+> .box{
+>   flex-wrap: nowrap | wrap | wrap-reverse;
+> }
+> ```
+
+![image-20201019230704715](_media/image-20201019230704715.png)
 
 ##11. 为什么浏览器读取css选择器的顺序是从右到左
 
