@@ -1,4 +1,4 @@
-# `Css样式属性表详解
+# Css样式属性表详解
 
 ## 1.  布局(layout)
 
@@ -1040,6 +1040,240 @@
 ![image-20201018165840090](_media/image-20201018165840090.png)
 
 ## 4. 背景(Background)
+
+### 4.1 背景颜色
+
+#### 4.1.1 颜色
+
+[在线色值表查询](http://www.mamicode.com/info-detail-1163830.html)
+
++ 颜色的英文名称
+  + red
+  + green
++ 十六进制的颜色
+  + \#000
+  + \#fff
++ rgb三原色
+  + rgb(0,0,0,)  最小值
+  + rgb(255,255,255,255)  最大值
++ rgba 透明度的颜色
+  + rgba(255,255,255,0.6)
+  + 透明度阿尔法取值是0-1之间
+
+![image-20201019174834148](_media/image-20201019174834148.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>document</title>
+    <style>
+      div {
+        width: 300px;
+        height: 300px;
+        border: 1px solid red;
+        /*
+        颜色的名称
+        */
+        /*
+        background-color: lightcoral;
+        */
+        /*
+        background-color: rgb(200, 180, 45);
+        */
+        background-color: #00ff7f;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>
+
+```
+
+### 4.2 背景图片
+
+1. **background-img**
+
+```html
+ <style>
+      body {
+        /*图片的路径一般使用相对路径*/
+        background-image: url('../images/1.jpg');
+      }
+    </style>
+<!--背景是多张图片组成-->
+<style>
+      body {
+        /*图片的路径一般使用相对路径*/
+        background-image: url('../images/2.jpg'), url('../images/1.jpg');
+        background-repeat: no-repeat;
+      }
+    </style>
+```
+
+![image-20201019180955222](_media/image-20201019180955222.png)
+
+2. **background-repeat**
+
++ repeat-x x轴方向平铺
++ repeat-y  y轴方向平铺
++ repeat  背景图像平铺
++ no-repeat  背景图像不平铺
++ round 背景图像自动缩放直到适应且填充满整个容器。（CSS3） 
++ space 背景图像以相同的间距平铺且填充满整个容器或某个方向。（CSS3）
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>document</title>
+    <style>
+      body {
+        /*图片的路径一般使用相对路径*/
+        background-image: url('../images/2.jpg'), url('../images/1.jpg');
+        background-repeat: no-repeat;
+      }
+    </style>
+  </head>
+  <body></body>
+</html>
+
+```
+
+![image-20201019181333556](_media/image-20201019181333556.png)
+
+3. **background-attachment**
+
++ fixed  背景图像相对于敞口固定
++ scroll  背景图像相对于元素固定，也就是说当元素内容滚动时背景图像不会跟着滚动，因为背景图像总是要跟着元素本身。但会随元素的祖先元素或窗体一起滚动。
++ local： 背景图像相对于元素内容固定，也就是说当元素随元素滚动时背景图像也会跟着滚动，因为背景图像总是要跟着内容。（CSS3）
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>document</title>
+    <style>
+      body {
+        /*图片的路径一般使用相对路径*/
+        background-image: url('../images/2.jpg'), url('../images/1.jpg');
+        background-repeat: space;
+        background-attachment: fixed;
+      }
+    </style>
+  </head>
+  <body></body>
+</html>
+
+```
+
+4. **background-size**
+
++ 长度值 不允许负值
++ 百分比  不允许负值
++ auto  图像的真实大小
++ cover  背景完全覆盖容器
++ contain  将背景图像等比缩放到宽度或高度与容器的宽度或高度相等，背景图像始终被包含在容器内。 
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>document</title>
+    <style>
+      body {
+        /*图片的路径一般使用相对路径*/
+        background-image: url('../images/2.jpg');
+        background-repeat: space;
+        background-attachment: fixed;
+        background-size: 400px;
+      }
+    </style>
+  </head>
+  <body></body>
+</html>
+
+```
+
+5. **background-position**
+
++ 百分比指定填充位置
++ 长度指定可以为负值
++ center  图片水平垂直方向居中
++ left  横向填充从左边开始
++ right 横向填充从右边开始
++ top 顶部开始
++ bottom 底部开始
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>document</title>
+    <style>
+      body {
+        /*图片的路径一般使用相对路径*/
+        background-image: url('../images/2.jpg');
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: 400px;
+        background-position: 80% 50%;
+      }
+    </style>
+  </head>
+  <body></body>
+</html>
+
+```
+
+
+
+### 4.3 精灵图
+
+> CSS雪碧 即[CSS Sprite](https://baike.baidu.com/item/CSS Sprite)，也有人叫它CSS精灵，是一种CSS图像合并技术，该方法是将小图标和背景图像合并到一张图片上，然后利用css的背景定位来显示需要显示的图片部分。
+
+![index_icon](_media/index_icon.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>document</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+        /*图片的路径一般使用相对路径*/
+        background-image: url('../images/index_icon.png');
+        background-position: -15px -128px;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>
+
+```
+
+![image-20201019182721286](_media/image-20201019182721286.png)
+
+
 
 ## 5. 文字和文本
 
