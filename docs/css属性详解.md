@@ -1275,7 +1275,197 @@
 
 ![image-20201019182721286](_media/image-20201019182721286.png)
 
+### 4.4 滑动门
 
+![image-20201022141518156](_media/image-20201022141518156.png)
+
+> 1. 为了使各种特殊形状的背景能够自适应元素中文本内容的多少，出现了CSS滑动门技术。
+>
+> 2. 使各种特殊形状的背景能够自由拉伸滑动，以适应元素内部的文本内容，可用性更强。
+>
+> 3. 最常见于各种导航栏的滑动门。
+>
+> 4. 利用CSS精灵Sprite（主要是背景位置position）和盒子padding撑开宽度, 以便能适应不同字数的导航栏。
+> 5. 原背景图--> 切开左边 --> 剩下的右边随着文字的增多从左往右滑动(这也是文字增长的方向) 
+
+**常见的网页中的导航栏的不布局:**
+
+```html
+<li>
+  <a href="#">
+    <span>导航栏内容</span>
+  </a>
+</li>
+```
+
+注意:
+
+1. a 设置 背景左侧，padding撑开合适宽度。    
+2. span 设置背景右侧， padding撑开合适宽度 剩下由文字继续撑开宽度。
+3. 之所以a包含span就是因为 整个导航都是可以点击的。
+
+![微信官方的背景图片 384X33](_media/3w4CwHw.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>滑动门技术</title>
+    <style>
+      /* 初始化的全局的样式 */
+      body,
+      html,
+      ul,
+      li,
+      h1,
+      h2,
+      h3,
+      a,
+      img {
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        text-decoration: none;
+      }
+      ul {
+        list-style: none;
+      }
+      /* 导航栏样式设计 */
+      nav {
+        height: 50px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      body {
+        background: url('https://res.wx.qq.com/a/wx_fed/weixin_portal/res/static/img/3S9sFMD.jpg')
+          repeat-x;
+      }
+      nav ul {
+        padding-top: 21px;
+        width: 900px;
+        margin: 0 auto;
+        height: 50px;
+        /*  border: 1px solid red; */
+      }
+      nav ul li {
+        float: left;
+      }
+      ul li a {
+        margin: 0 2px;
+        height: 33px;
+        text-align: center;
+        line-height: 33px;
+        padding-left: 15px;
+        display: inline-block;
+        color: #fff;
+        cursor: pointer;
+      }
+      a span {
+        display: inline-block;
+        height: 33px;
+        padding-right: 15px;
+      }
+      a:hover {
+        background: url('https://res.wx.qq.com/a/wx_fed/weixin_portal/res/static/img/3w4CwHw.png')
+          no-repeat scroll;
+      }
+      a:hover span {
+        background: url('https://res.wx.qq.com/a/wx_fed/weixin_portal/res/static/img/3w4CwHw.png')
+          no-repeat scroll 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li>
+          <a href="#"><span>首页</span></a>
+        </li>
+        <li>
+          <a href="#"><span>帮助与反馈</span></a>
+        </li>
+        <li>
+          <a href="#"><span>公众平台</span></a>
+        </li>
+        <li>
+          <a href="#"><span>开放平台</span></a>
+        </li>
+        <li>
+          <a href="#"><span>微信支付</span></a>
+        </li>
+      </ul>
+    </nav>
+  </body>
+</html>
+
+```
+
+![](_media/GIF7.gif)
+
+### 4.5 画三角形
+
+![image-20201022150904534](_media/image-20201022150904534.png)
+
+> 页面中的很多小的三角形并不是图片，他是我们通过css绘制出来的:
+
+```html
+      div:first-child {
+        height: 100px;
+        width: 100px;
+        border-style: solid;
+        border-width: 100px 100px 100px 100px;
+        border-color: red forestgreen blue cyan;
+        background: #000;
+      }
+```
+
+![image-20201022152200153](_media/image-20201022152200153.png)
+
+```html
+ div:first-child {//宽高设置为0
+        height: 0;
+        width: 0;
+        border-style: solid;
+        border-width: 100px 100px 100px 100px;
+        border-color: red forestgreen blue cyan;
+        background: #000;
+      }
+```
+
+![image-20201022152236055](_media/image-20201022152236055.png)
+
+需要那一边的三角形我们只需要将其他的边设置为透明就可以了
+
+```html
+  div:first-child {
+        height: 0;
+        width: 0;
+        border-style: solid;
+        border-width: 100px 100px 100px 100px;
+        border-color: red transparent transparent transparent;
+      }
+```
+
+![image-20201022152443401](_media/image-20201022152443401.png)
+
+虽然图形出来了，但是其他的三边还在占位，我们讲其他的边设置宽度为一半
+
+```html
+ div:first-child {
+        height: 0;
+        width: 0;
+        border-style: solid;
+        border-width: 100px 50px 0px 50px;
+        border-color: red transparent transparent transparent;
+      }
+```
+
+最终的效果:
+
+![image-20201022152643482](_media/image-20201022152643482.png)![image-20201022152722603](_media/image-20201022152722603.png)
 
 ## 5. 文字和文本
 
