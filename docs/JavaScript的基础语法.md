@@ -821,23 +821,510 @@ show(200)()//返回值的函数执行;
 >
 > 将这样的所有的作用域列出来，可以有一个结构: 函数内指向函数外的链式结构。就称作作用域链。
 
+```javascript
+var num = 123;
+function show(){
+    var name = "joke";
+    console.log(name);
+}
+
+function sum(){
+    var age = 23;
+    function say(){
+        console.log(age)
+    }
+}
+show();
+sum();
+```
+
+![image-20201022210518023](_media/image-20201022210518023.png)
+
+![image-20201022210654669](_media/image-20201022210654669.png)
+
 ### 3.6 嵌套函数和 闭包(closure) :exclamation:
 
-### 3.7 this 关键字 :exclamation:
+阮一峰 闭包[http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html](http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html)
+
+> 闭包就是能够读取其他函数内部变量的函数。
+>
+> 由于在Javascript语言中，只有函数内部的子函数才能读取局部变量，因此可以把闭包简单理解成"定义在一个函数内部的函数"。
+>
+> 所以，在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。
+
+#### 3.6.1 变量的作用域
+
+```javascript
+//javascript的变量作用域可以分为两种：全局变量和局部变量。
+//在函数内声明的变量就是局部变量，这个变量在函数体内可访问，在函数外部无法直接读取局部变量。
+//例如：
+var globalVariable = 1; //全局变量
+function f() {
+    var localVariable = 100; //局部变量 注意函数内的变量一定要加上关键字var才能成为局部变量，不然就会成为全局变量
+}
+alert(globalVariable); //显示1
+alert(localVariable);  //抛出错误 提示localVariable未声明
+
+function f1(){
+    //没有使用 var n 就是一个全局的变量
+　　　　n=999;
+　　}
+　　f1();
+　　alert(n); // 999
+```
+
+#### 3.6.2 如何在外部读取函数内部的局部变量
+
+```javascript
+ <script>
+      /*show 作用域中的变量是对fn函数可见的 但是反过来就不可以 */
+      function show() {
+        function fn() {
+          var num = 200
+          /* 将fn中的局部变量作为返回值 在 show就可以看见了 */
+          return num
+        }
+        //在函数内部执行 fn就可以使用fn内部的局部变量的值了
+        var result = fn()
+        console.log(result)
+
+        return fn()
+      }
+      show()
+      console.log(show())
+</script>
+
+<script>
+      /*show 作用域中的变量是对fn函数可见的 但是反过来就不可以 */
+      function show() {
+        function fn() {
+          var num = 200
+          /* 将fn中的局部变量作为返回值 在 show就可以看见了 */
+          return num
+        }
+        //在函数内部执行 fn就可以使用fn内部的局部变量的值了
+        //var result = fn()
+        //console.log(result)
+
+        return fn
+      }
+      var ff = show()
+      var f2 = ff()
+      console.log(f2)
+</script>
+```
+
+> 上述代码的实现就是闭包:
+
+#### 3.6.3 闭包可以使函数内部的变量一致保存在内存中
+
+> 闭包可以用在许多地方。它的最大用处有两个，一个是前面提到的可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。
+
+```javascript
+      /*show 作用域中的变量是对fn函数可见的 但是反过来就不可以 */
+      function show() {
+        var count = 0
+        function fn() {
+          count++
+          console.log(count)
+        }
+        return fn
+      }
+      var ff = show()
+      ff() //函数执行完成 局部变量并没有从内存中释放掉
+      ff()
+      ff()
+```
+
+> **使用闭包的注意点**
+>
+> 1）由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露。解决方法是，在退出函数之前，将不使用的局部变量全部删除。
+>
+> 2）闭包会在父函数外部，改变父函数内部变量的值。所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），把内部变量当作它的私有属性（private value），这时一定要小心，不要随便改变父函数内部变量的值。
+
+#### 3.6.4 闭包的高级写法
+
+> 前面的写法是最原始的写法在实际应用中，会将闭包和匿名函数联系在一起使用。
+
+```javascript
+      ;(function () {
+        function doSomething() {
+          console.log('doSomething')
+        }
+        function doOtherthing() {
+          console.log('doOtherthing')
+        }
+        //将局部的方法暴露给全局对象window 就可以放心的去调用了
+        window.doThings = {
+          doOtherthing: doOtherthing,
+          doSomething: doSomething,
+        }
+      })()
+
+      doThings.doOtherthing()
+      doThings.doSomething()
+```
+
+### 3.7 预解析
+
+> JavaScript代码的执行是由浏览器中的JavaScript解析器来执行的。JavaScript解析器执行JavaScript代码的时候，分为两个过程：预解析过程和代码执行过程。在当前的作用域之下
+> ，js运行之前，会把带有var和function关键字声明的变量先声明，并在内存中安排好。然后从上至下解析js语句。而且function的声明优先于var声明
+>
+> 预解析过程：
+>
+> 1. 把变量的声明提升到当前作用域的最前面，只会提升声明，不会提升赋值。
+> 2. 把函数的声明提升到当前作用域的最前面，只会提升声明，不会提升调用。
+> 3. 先提升var，在提升function。
+
+#### 3.7.1 变量的提示
+
+> - 变量提升
+>
+>   定义变量的时候，变量的声明会被提升到作用域的最上面，变量的赋值不会提升。
+
+```javascript
+      console.log(num) //undefined
+      var num = 10
+      console.log(num) //10
+//可以分解为
+	var num ;
+	console.log(num);
+	num = 10;
+	console.log(num)
+```
+
+```javascript
+ 		var num = 10
+      fun()
+      function fun() {
+        //局部变量 不是全局变量 变量的提升
+        console.log(num)
+        var num = 20
+      }
+//结果是undefined
+```
+
+```javascript
+	 var a = 18
+      f1()
+      function f1() {
+        var b = 9
+        console.log(a) //undefined
+        console.log(b) //9
+        var a = '123'
+      }
+```
+
+```javascript
+		f1()
+      console.log(c) //9
+      console.log(b) //9
+      console.log(a) //a is not defined
+      function f1() {
+        var a = (b = c = 9)
+        console.log(a) //9
+        console.log(b) //9
+        console.log(c) //9
+      }
+      /* 
+      var a = (b = c = 9) 
+      解析为: 
+      var a = 9;
+      b = 9;
+      c= 9;
+      b 和c 就是全局变量
+      a 是局部变量 在全局中是访问不到的 
+      */
+```
+
+### 3.8 his 关键字 :exclamation:
+
+> 面向对象语言中 this 表示当前对象的一个引用。
+>
+> 但在 JavaScript 中 this 不是固定不变的，它会随着执行环境的改变而改变。
+>
+> - 在方法中，this 表示该方法所属的对象。
+> - 如果单独使用，this 表示全局对象。
+> - 在函数中，this 表示全局对象。
+> - 在函数中，在严格模式下，this 是未定义的(undefined)。
+> - 在事件中，this 表示接收事件的元素。
+> - 类似 call() 和 apply() 方法可以将 this 引用到任何对象。
 
 ## 4. JavaScript常用的对象和方法
 
-+ Object
-+ Date
-+ Array
-+ Math
-+ Number
-+ reqexp (正则表达式)
-+ Global (全局对象)
-+ String
-+ Function 
+> JavaScript 对象是拥有属性和方法的特殊数据类型:
+>
+> + 内置对象
+> + 自定义对象
+>
+> 在 JavaScript中，几乎所有的事物都是对象。
 
-## 5. JavaScript的面向对象
+真实生活中，一辆汽车是一个对象。
+
+对象有它的属性，如重量和颜色等，方法有启动停止等:
+
+| 对象                               | 属性                                                         | 方法                                              |
+| :--------------------------------- | :----------------------------------------------------------- | :------------------------------------------------ |
+| ![img](_media/objectExplained.gif) | car.name = Fiat  car.model = 500  car.weight = 850kg  car.color = white | car.start()  car.drive()  car.brake()  car.stop() |
+
+所有汽车都有这些属性，但是每款车的属性都不尽相同。
+
+所有汽车都拥有这些方法，但是它们被执行的时间都不尽相同。
+
+#### 4.1 自定义对象
+
+> 在javaScript中自定义对象有两种方式:
+>
+> 1. 使用构造函数创建对象
+> 2. 使用字面量创建对象(ES6以后主要推荐使用)
+
+<font style="color:red;">**构造函数创建对象**</font>
+
+```javascript
+//构造函数名称首字母必须大写
+function Person(){
+    this.name = "joke";
+    this.age = 25;
+   	this.say = function(){
+        console.log("say hello world");
+    } 
+}
+//使用new关键字实例化对象
+var p1 = new Person();
+console.log(p1);
+console.log(p1.name);
+console.log(p1.age);
+p1.say();
+ var p2 = new Person();
+console.log(p2);
+console.log(p2.name);
+console.log(p2.age);
+p2.say();
+```
+
+> 存在的问题对象的属性值都是相同 的。
+
+```javascript
+//构造函数名称首字母必须大写
+function Person(name,age){
+    this.name = name;
+    this.age = age;
+   	this.say = function(){
+        console.log("say hello world");
+    } 
+}
+//使用new关键字实例化对象
+var p1 = new Person("admin",88);
+console.log(p1);
+console.log(p1.name);
+console.log(p1.age);
+p1.say();
+ var p2 = new Person("jjoke",99);
+console.log(p2);
+console.log(p2.name);
+console.log(p2.age);
+p2.say();
+```
+
+> 属性值可以通过实例对象时候的参数去指定
+
+```javascript
+//构造函数名称首字母必须大写
+function Person(){
+    this.name = "joke";
+    this.age = 25;
+   	this.say = function(){
+        console.log("say hello world");
+    } 
+}
+//使用new关键字实例化对象
+var p1 = new Person();
+console.log(p1);
+console.log(p1.name);
+console.log(p1.age);
+p1.say();
+ var p2 = new Person();
+console.log(p2);
+console.log(p2.name);
+console.log(p2.age);
+p2.say();
+//比较两个对象之间的属性和方法
+console.log(p1 == p2);//false
+console.log(p1 === p2);//fasle
+console.log(p1.name === p2.name)//true
+console.log(p1.age === p2.age)//true
+console.log(p1.say == p2.say )//false
+console.log(p1.say === p2.say )//false
+
+```
+
+> 我们发现对象之间是不相同的，属性值是相同, 调用同一个方法 发现值是false。方法对于对象来说在构造函数中的方法，应该是各个对象来共享的。那么为什么不一样呢？
+
+![image-20201022233833310](_media/image-20201022233833310.png)
+
+> new 开辟 堆内存空间，内存地址不一样，所以方法在各自的内存中，不能共享
+>
+> 怎么解决呢?
+>
+> JavaScript提供了原型 就是来解决这一问题的
+
+<font style="color:red">**原型**</font>
+
+```javascript
+<script>
+      //构造函数名称首字母必须大写
+      function Person(name, age) {
+        this.name = name
+        this.age = age
+      }
+      //共享的方法
+      Person.prototype.say = function () {
+        console.log('Hello World')
+      }
+      //共享的属性
+      Person.prototype.address = '陕西省西安市'
+      //使用new关键字实例化对象
+      var p1 = new Person('admin', 88)
+      console.log(p1)
+      console.log(p1.name)
+      console.log(p1.age)
+      p1.say()
+      var p2 = new Person('joke', 99)
+
+      console.log(p2)
+      console.log(p2.name)
+      console.log(p2.age)
+      p2.say()
+      //比较两个对象之间的属性和方法
+      console.log(p1 == p2) //fasle
+      console.log(p1 === p2) //false
+      console.log(p1.name === p2.name) //fasle
+      console.log(p1.age === p2.age) //fasle
+      console.log(p1.say == p2.say) //true
+      console.log(p1.say === p2.say) //true
+      console.log(p1.address === p2.address) //true
+    </script>
+```
+
+> 原型链js高级部分讲解:
+
+### 4.2 内置对象
+
+> js中已经定义好的对象。
+>
+> 内置对象有的属性和方法学习
+
+#### 4.2.1 Object
+
+> 在JavaScript中，几乎所有的对象都是`Object`类型的实例，它们都会从`Object.prototype`继承属性和方法
+>
+> 在高级部分重点讲解:
+
+#### 4.2.2 Math
+
+MDN 官方详细看考资料[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math)
+
+> Math  是一个内置对象，它拥有一些数学常数属性和数学函数方法。`Math` 不是一个函数对象。
+>
+> 与其他全局对象不同的是，`Math` 不是一个构造器。`Math` 的所有属性与方法都是静态的。引用圆周率的写法是 `Math.PI`，调用正余弦函数的写法是 `Math.sin(x)`，`x` 是要传入的参数。`Math` 的常量是使用 JavaScript 中的全精度浮点数来定义的。
+
+```javascript
+Math.PI						// 圆周率
+Math.random()				// 生成随机数
+Math.floor()/Math.ceil()	 // 向下取整/向上取整
+Math.round()				// 取整，四舍五入
+Math.abs()					// 绝对值
+Math.max()/Math.min()		 // 求最大和最小值
+
+Math.sin()/Math.cos()		 // 正弦/余弦
+Math.power()/Math.sqrt()	 // 求指数次幂/求平方根
+```
+
+#### 4.2.3 Date
+
+MDN官方参考资料[https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date)
+
+> 创建一个 JavaScript `Date` 实例，该实例呈现时间中的某个时刻。`Date` 对象则基于 [Unix Time Stamp](http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16)，即自1970年1月1日（UTC）起经过的毫秒数。
+
+```javascript
+// 获取当前时间，UTC世界时间，距1970年1月1日（世界标准时间）起的毫秒数
+var now = new Date();
+console.log(now.valueOf());	// 获取距1970年1月1日（世界标准时间）起的毫秒数
+
+Date构造函数的参数
+1. 毫秒数 1498099000356		new Date(1498099000356)
+2. 日期格式字符串  '2015-5-1'	 new Date('2015-5-1')
+3. 年、月、日……				  new Date(2015, 4, 1)   // 月份从0开始
+```
+
+- 获取日期的毫秒形式
+
+```javascript
+var now = new Date();
+// valueOf用于获取对象的原始值
+console.log(date.valueOf())	
+
+// HTML5中提供的方法，有兼容性问题
+var now = Date.now();	
+
+// 不支持HTML5的浏览器，可以用下面这种方式
+var now = + new Date();			// 调用 Date对象的valueOf() 
+```
+
+- 日期格式化方法
+
+```javascript
+toString()		// 转换成字符串
+valueOf()		// 获取毫秒值
+// 下面格式化日期的方法，在不同浏览器可能表现不一致，一般不用
+toDateString()
+toTimeString()
+toLocaleDateString()
+toLocaleTimeString()
+```
+
+- 获取日期指定部分
+
+```javascript
+getTime()  	  // 返回毫秒数和valueOf()结果一样
+getMilliseconds() 
+getSeconds()  // 返回0-59
+getMinutes()  // 返回0-59
+getHours()    // 返回0-23
+getDay()      // 返回星期几 0周日   6周6
+getDate()     // 返回当前月的第几天
+getMonth()    // 返回月份，***从0开始***
+getFullYear() //返回4位的年份  如 2016
+```
+
+**日期格式化:**
+
+```javascript
+function formatDate(d) {
+  //如果date不是日期对象，返回
+  if (!date instanceof Date) {
+    return;
+  }
+  var year = d.getFullYear(),
+      month = d.getMonth() + 1, 
+      date = d.getDate(), 
+      hour = d.getHours(), 
+      minute = d.getMinutes(), 
+      second = d.getSeconds();
+  month = month < 10 ? '0' + month : month;
+  date = date < 10 ? '0' + date : date;
+  hour = hour < 10 ? '0' + hour : hour;
+  minute = minute < 10 ? '0' + minute:minute;
+  second = second < 10 ? '0' + second:second;
+  return year + '-' + month + '-' + date + ' ' + hour + ':' + minute + ':' + second;
+}
+```
+
+#### 4.2.4 Array(数组)
+
+
+
+## 5. JavaScript的面向对象基础
 
 ### 5.1 构造函数自定义对象
 
