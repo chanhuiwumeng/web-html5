@@ -1705,3 +1705,93 @@ BFC 即 Block Formatting Contexts (块级格式化上下文)，它属于上述�
 ```
 
 ![image-20201018111300839](_media/image-20201018111300839.png)
+
+### 3.7 盒子模型的水平布局
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .outer{
+            width: 800px;
+            height: 200px;
+            border: 10px red solid;
+        }
+
+        .inner{
+            /* width: auto;  width的值默认就是auto*/
+            width: 200px;
+            height: 200px;
+            background-color: #bfa;
+            margin-right: auto;
+            margin-left: auto;
+            /* margin-left: 100px;
+            margin-right: 400px */
+            /* 
+                元素的水平方向的布局：
+                    元素在其父元素中水平方向的位置由以下几个属性共同决定“
+                        margin-left
+                        border-left
+                        padding-left
+                        width
+                        padding-right
+                        border-right
+                        margin-right
+
+                    一个元素在其父元素中，水平布局必须要满足以下的等式
+margin-left+border-left+padding-left+width+padding-right+border-right+margin-right = 其父元素内容区的宽度 （必须满足）
+
+                0 + 0 + 0 + 200 + 0 + 0 + 0 = 800
+                0 + 0 + 0 + 200 + 0 + 0 + 600 = 800
+
+
+                100 + 0 + 0 + 200 + 0 + 0 + 400 = 800
+                100 + 0 + 0 + 200 + 0 + 0 + 500 = 800
+                    - 以上等式必须满足，如果相加结果使等式不成立，则称为过度约束，则等式会自动调整
+                        - 调整的情况：
+                            - 如果这七个值中没有为 auto 的情况，则浏览器会自动调整margin-right值以使等式满足
+                    - 这七个值中有三个值和设置为auto
+                        width
+                        margin-left
+                        maring-right
+                        - 如果某个值为auto，则会自动调整为auto的那个值以使等式成立
+                            0 + 0 + 0 + auto + 0 + 0 + 0 = 800  auto = 800
+                            0 + 0 + 0 + auto + 0 + 0 + 200 = 800  auto = 600
+                            200 + 0 + 0 + auto + 0 + 0 + 200 = 800  auto = 400
+
+                            auto + 0 + 0 + 200 + 0 + 0 + 200 = 800  auto = 400
+
+
+                            auto + 0 + 0 + 200 + 0 + 0 + auto = 800  auto = 300
+
+                        - 如果将一个宽度和一个外边距设置为auto，则宽度会调整到最大，设置为auto的外边距会自动为0
+                        - 如果将三个值都设置为auto，则外边距都是0，宽度最大
+                        - 如果将两个外边距设置为auto，宽度固定值，则会将外边距设置为相同的值
+                            所以我们经常利用这个特点来使一个元素在其父元素中水平居中
+                            示例：
+                                width:xxxpx;
+                                margin:0 auto;
+
+
+
+             */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="outer">
+
+        <div class="inner"></div>
+
+    </div>
+    
+</body>
+</html>
+```
+

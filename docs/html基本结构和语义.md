@@ -208,7 +208,7 @@ Chrome 浏览器是 google 旗下的浏览器。Chrome 浏览器至发布以来�
 
 [官网](https://www.jetbrains.com/webstorm/)
 
-![img](_media/timg)
+![img](_media/jdksfhkjsdhfdjk.png)
 
 > 好用 收费
 
@@ -239,6 +239,25 @@ Chrome 浏览器是 google 旗下的浏览器。Chrome 浏览器至发布以来�
 > 现在的前端开发神器 也可以编辑其他的语言
 
 **Vscode 前端开发常用插件集合:**
+
+Auto Close Tag  标签自动闭合
+
+open in brower  浏览器打开  
+
+live  serve   在线服务器
+
+path intellisenese  路径自动补全
+
+project manger  项目管理
+
+Beautify
+
+Bracket Pair Colorizer  括号加颜色
+
+auto  rename  tag  标签重命名
+
+
+vscode icons
 
 ## 5. 文档
 

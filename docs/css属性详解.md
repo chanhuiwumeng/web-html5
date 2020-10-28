@@ -631,6 +631,8 @@
 
 ![image-20201018150102721](_media/image-20201018150102721.png)
 
+> 行内元素设置为float以后就可以去设置宽高了。
+
 ## 3. 定位(position)
 
 > 如果，说浮动， 关键在一个 “浮” 字上面， 那么 我们的定位，关键在于一个 “位” 上。
@@ -1059,8 +1061,15 @@
 + rgba 透明度的颜色
   + rgba(255,255,255,0.6)
   + 透明度阿尔法取值是0-1之间
++ HSLA值
+  + H Hue 色相 (色调)  0(或360)表示红色，120表示绿色，240表示蓝色，也可取其他数值来指定颜色。
+  + S Saturation  饱和度  0%-100%
+  + L lightness 亮度  0%-100%
+  + A alpha  透明度  0-1 之间
 
 ![image-20201019174834148](_media/image-20201019174834148.png)
+
+![image-20201023232838509](_media/image-20201023232838509.png)
 
 ```html
 <!DOCTYPE html>
@@ -1466,6 +1475,21 @@
 最终的效果:
 
 ![image-20201022152643482](_media/image-20201022152643482.png)![image-20201022152722603](_media/image-20201022152722603.png)
+
+**在IE6等低版本下画三角形的问题:**
+
+```html
+div:first-child {
+        height: 0;
+        width: 0;
+        border-style:  solid dashed  dashed  dashed;/*使用虚线来画*/
+        border-width: 100px 50px 0px 50px;
+        border-color: red transparent transparent transparent;
+		overflow:hidden;
+      }
+```
+
+
 
 ## 5. 文字和文本
 
@@ -2057,6 +2081,45 @@
 >
 > [hover.css ](http://ianlunn.github.io/Hover/)
 
+### 8.2 动画的帧数动画
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>step动画帧数</title>
+    <style>
+      div {
+        width: 137.4px;
+        border: 1px solid red;
+        height: 154px;
+        background: url(../images/1287935-9fb1095de0d2d321.webp);
+        -webkit-animation: run 1s steps(9) 0s infinite both;
+        animation: run 1s steps(9) 0 infinite both;
+        background-position: -15px 0;
+      }
+
+      @-webkit-keyframes run {
+        to {
+          background-position: -900% 0;
+        }
+      }
+      div:hover {
+        animation-play-state: paused;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>
+
+```
+
+![](_media/GIF8.gif)
+
 ## 9 .Css补充知识
 
 ### 9.1 鼠标样式
@@ -2289,60 +2352,7 @@ layui图标库
 
 **IconMoon使用:**
 
-## 10 . Flex伸缩盒
 
-阮一峰的网络日志  flex布局[http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
-
-![img](_media/bg2015071001.gif)
-
-> 布局的传统解决方案，基于[盒状模型](https://developer.mozilla.org/en-US/docs/Web/CSS/box_model)，依赖 [`display`](https://developer.mozilla.org/en-US/docs/Web/CSS/display) 属性 + [`position`](https://developer.mozilla.org/en-US/docs/Web/CSS/position)属性 + [`float`](https://developer.mozilla.org/en-US/docs/Web/CSS/float)属性。它对于那些特殊布局非常不方便，比如，[垂直居中](https://css-tricks.com/centering-css-complete-guide/)就不容易实现。
->
-> 2009年，W3C 提出了一种新的方案----Flex 布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。
->
-> Flex 是 Flexible Box 的缩写，意为"弹性布局"，用来为盒状模型提供最大的灵活性。
->
-> 任何一个容器都可以指定为 Flex 布局。
->
-> div{
->
-> ​	display:flex | line-flext;
->
-> }
-
-### 10.1 基本概念
-
-> 采用 Flex 布局的元素，称为 Flex 容器（flex container），简称"容器"。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称"项目"。
->
-> 容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做`main start`，结束位置叫做`main end`；交叉轴的开始位置叫做`cross start`，结束位置叫做`cross end`。
->
-> 项目默认沿主轴排列。单个项目占据的主轴空间叫做`main size`，占据的交叉轴空间叫做`cross size`。
-
-![img](_media/bg2015071004.png)
-
-### 10.2 容器的属性
-
-> .box {
-> 		flex-direction: row | row-reverse | column | column-reverse;
->   }
-
-![img](_media/bg2015071005.png)
-
-- `row`（默认值）：主轴为水平方向，起点在左端。
-- `row-reverse`：主轴为水平方向，起点在右端。
-- `column`：主轴为垂直方向，起点在上沿。
-- `column-reverse`：主轴为垂直方向，起点在下沿。
-
-### 10.3 flex-wrap
-
-> 默认情况下，项目都排在一条线（又称"轴线"）上。`flex-wrap`属性定义，如果一条轴线排不下，如何换行
->
-> ```css
-> .box{
->   flex-wrap: nowrap | wrap | wrap-reverse;
-> }
-> ```
-
-![image-20201019230704715](_media/image-20201019230704715.png)
 
 ##11. 为什么浏览器读取css选择器的顺序是从右到左
 

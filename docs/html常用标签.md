@@ -46,25 +46,51 @@
 ![image-20201013153403808](_media/image-20201013153403808.png)
 
 ```html
-<!-- 段落标签 
-      段落之间是有间隙的
-      strong加粗处理
-      css 文本样式进行文字的缩进
-   -->
-  <p style="text-indent: 24px;">
-    <strong>四川雅安</strong>芦山县卫生健康局局长崔夏说：“对摸排出来的返乡人员首先要建台账，然后要对他们进行14天、
-    每天两次的体温监测和随访。办健康证明需要扫码，但有一半以上的务工人员不会用智能手机，也不会扫码，
-    更不会点进去填写自己基本的信息和情况，所以必须要我们医护人员手把手教。”
-    对于当地交通部门来说，务工人员居住分散，出行人员难以确定，给他们组织运输也带来了很大的压力。
-    除此之外，车辆状况、途中的防控、应急处理等等，也都需要他们提前准备。
-  </p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p标签</title>
+  </head>
+  <body>
+    <!-- p 段落标签 一段文字的展示 -->
+    <!-- 一般情况下我们在html源码中使用换行和空格: 
+      1. 源码中没有使用标签换行，页面展示的效果会填充满浏览器以后自动换行。
+      2. 源码中 对于空格 无论你写多少个空格  浏览器只能解析一个
+      3. 段落和段落之间是由间隙的
+      4. 一般情况下我们要首行第一个文字缩进
+        a. 使用字符实体
+          &nbsp;  两个占一个汉字的大小  不推荐使用这个   浏览器兼容性问题
+          &ensp;   一个占一半的汉字大小空间  兼容性良好 推荐使用
+        b. css的属性 
+          text-indent  文字缩进
+      5.strong 文字加粗
+    -->
+    <p>
+      &nbsp;&nbsp;&nbsp;&nbsp;<strong>“十三五”</strong>时期是我国全面建成小康社会的决胜阶段。五年来，我国全面贯彻落实新发展理念，推动更深层次改革，
+      实行更高水平开放，国民经济持续健康发展，重大科技成果不断涌现，脱贫攻坚成果举世瞩目，
+      环境更加优美，民生保障更加有力。这是奋斗的五年，也是辉煌的五年。“十三五”期间，
+      我国经济社会各领域取得了辉煌的成就，我国制度优势不断转化为国家治理效能。
+    </p>
+    <p>
+      &ensp;&ensp;&ensp;&ensp;“十三五”时期是我国全面建成小康社会的决胜阶段。五年来，我国全面贯彻落实新发展理念，推动更深层次改革，
+      实行更高水平开放，国民经济持续健康发展，重大科技成果不断涌现，脱贫攻坚成果举世瞩目，
+      环境更加优美，民生保障更加有力。这是奋斗的五年，也是辉煌的五年。“十三五”期间，
+      我国经济社会各领域取得了辉煌的成就，我国制度优势不断转化为国家治理效能。
+    </p>
+    <!-- css的行内样式 写在开始标签内部的样式 -->
+    <p style="text-indent: 32px">
+      “十三五”时期是我国全面建成小康社会的决胜阶段。五年来，我国全面贯彻落实新发展理念，推动更深层次改革，
+      实行更高水平开放，国民经济持续健康发展，重大科技成果不断涌现，脱贫攻坚成果举世瞩目，
+      环境更加优美，民生保障更加有力。这是奋斗的五年，也是辉煌的五年。“十三五”期间，
+      我国经济社会各领域取得了辉煌的成就，我国制度优势不断转化为国家治理效能。
+    </p>
+    你好&ensp;&ensp;啊<br />
+    陕西&ensp;&ensp;省
+  </body>
+</html>
 
-  <p>
-    四川雅安芦山县卫生健康局局长崔夏说：“对摸排出来的返乡人员首先要建台账，然后要对他们进行14天、
-    每天两次的体温监测和随访。办健康证明需要扫码，但有一半以上的务工人员不会用智能手机，也不会扫码，
-    更不会点进去填写自己基本的信息和情况，所以必须要我们医护人员手把手教。”对于当地交通部门来说，务工人员居住分散，出行人员难以确定，给他们组织运输也带来了很大的压力。
-    除此之外，车辆状况、途中的防控、应急处理等等，也都需要他们提前准备。
-  </p>
 ```
 
 ![image-20201013153809868](_media/image-20201013153809868.png)
@@ -76,6 +102,7 @@
 + meta 元数据
 + param  
 + link
++ base
 
 ```html
 <!--
@@ -177,6 +204,11 @@ rel 属性规定当前文档与被链接文档之间的关系
   <img src="https://www.baidu.com/img/flexible/logo/pc/result@2.png" width="100px" height="100px" title="markdown" alt="图片加载失败"></img>
   <img src="https://www.jd.com/" width="100px" height="100px" title="markdown" alt="图片加载失败"></img>
   <br>
+
+<img
+      src="data:image/jpg;base64,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DRxcPeXePltos8t7seijufYE0zwf4N1jxzro0zQoN23BubpwfKtlPdz6nso5P0ya+uvBHgjSvAfh9NM0lC7Md9zcuP3lxJjlm/kB0A4oA1dE0ax8PaHaaRpMAgs7OIRRRjsB3J7knknuSTV+kooAWikooAMUYpaSgAxRiiigDG8T+E9G8YaO2m+ILJLqE8o3R4m/vIw5VvcfQ5FfN/jn4EeIfDLSXegLJr2mAk/uk/0mIf7UY+/9U5/2RX1TRigD4E/iZTkMhwykYKn0I6g19CfswH/iWeJh/wBPcB/8hmvUvE/w78K+MPm17RreefGBdIDHMP8AtouG/AnFWfCfg3RPBWlNp/h60+zwySGSRmdneRsYyzMcngAegoA3MUYoooAMV89/tOn/AE/w0P8Apldf+hRV9CVzvjDwJoHjq0t4PEVo04tnLQSRytG8ZON2GU9DgZHTgelAHxOimSaOGJWkmkIWOKNSzufQKOT+FeteBvgBruvtFeeLDJoenH5vs4wbuUemORF9TlvYda+gPDPgTwz4PjI8O6PbWchGGnC75nHvI2WP510GKAM3QPDuleF9Hi0vQbKOytIukcY+8e7MTyzHuTkmtLFFFABijFFFABiilooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Z"
+      alt=""
+    />
 ```
 
 ![image-20201013160329567](_media/image-20201013160329567.png)
