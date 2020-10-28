@@ -8,6 +8,8 @@
   * [一.Css简介和基本使用](css简介.md)
   * [二.Css属性详解](css属性详解.md)
   * [二.Css扩展](css扩展.md)
+  * [三.聊聊像素](聊聊像素.md)
+  * [四.移动端开发](移动端开发.md)
 
 * **第三章 JavaScript:**
   * [一. JavaScript基础知识](JavaScript基础知识.md)
