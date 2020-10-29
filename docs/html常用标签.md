@@ -650,6 +650,10 @@ HTML 使用超级链接与网络上的另一个文档相连。
 ## 12. 文本域标签
 
 > 评论框使用
+>
+> cols  每行默认的文字个数。
+>
+> rows  默认的行
 
 ```html
 <textarea name="" id="" cols="30" rows="10"></textarea>
