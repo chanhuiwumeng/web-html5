@@ -1322,21 +1322,40 @@ function formatDate(d) {
 
 #### 4.2.4 Array(数组)
 
+> 数组对象的作用是：使用单独的变量名来存储一系列的值。
+>
+> 数组是一种类列表对象，它的原型中提供了遍历和修改元素的相关操作。JavaScript 数组的长度和元素类型都是非固定的。因为数组的长度可随时改变，并且其数据在内存中也可以不连续，所以 JavaScript 数组不一定是密集型的，这取决于它的使用方式
 
+**数组的创建方式:**
 
-## 5. JavaScript的面向对象基础
+*常规方式*
 
-### 5.1 构造函数自定义对象
+```html
+var myCars=new Array();
+myCars[0]="Saab";      
+myCars[1]="Volvo";
+myCars[2]="BMW";
+```
 
-### 5.2 对象的原型
+*简洁方式*
 
-### 5.3 原型链
+```html
+var myCars=new Array("Saab","Volvo","BMW");
+```
 
-### 5.4 JavaScript对象的继承
+*字面量方式*
 
-## 6. BOM
+```html
+var myCars=["Saab","Volvo","BMW"];
+```
 
-## 7. DOM
+> 
+
+### 
+
+## 5. BOM
+
+## 6. DOM
 
 
 
