@@ -1071,7 +1071,7 @@ function f1(){
 
 所有汽车都拥有这些方法，但是它们被执行的时间都不尽相同。
 
-#### 4.1 自定义对象
+### 4.1 自定义对象
 
 > 在javaScript中自定义对象有两种方式:
 >
@@ -1349,11 +1349,329 @@ var myCars=new Array("Saab","Volvo","BMW");
 var myCars=["Saab","Volvo","BMW"];
 ```
 
-> 
+> 通过指定数组名以及索引号码，你可以访问某个特定的元素。
+>
+> var name=myCars[0];  获取数组下标是0的对象值
+>
+> myCars[0]="Opel"; 给数组下标位0的位置赋值
 
-### 
+![image-20201102152041700](_media/image-20201102152041700.png)
+
+>  数组的属性: 
+>
+> + length 数组的长度，数组中元素的个数
+>
+> + constuctor 返回数组的原型构造函数
+> + prototype 数组的原型
+
+**数组对象常用的方法:**
+
++ `concat`连接两个或者更多的数组并返回结果
+
++ `indexof` 返回数组元素所在的下标值
++ `lastindexOf ` 搜索数组中的元素并返回最后一次出现的下标值
++ `isArray` 判断对新是否是数组
++ `includes` 判断一个数组对象是否包含一个指定值
++ `join`  将数组的所有元素放入一个字符串
++ `pop` 删除数组的最后一个元素，并将最后一个元素返回
++ `push`  向数组的末尾添加一个或更多元素，并返回新的长度。
++ `reverse` 反转数组的元素顺序
++ `shift` 删除并返回数组的第一个元素
++ `sort` 对数组的元素进行排序
++ `unshift` 向数组的头部添加一个或者多个元素，并返回新的长度
++ `slice` 返回数组的一部分新的数组
++ `splice` 丛数组中添加或者删除元素
++ `filter` 检测数值元素，并返回符合条件所有元素的数组。
+
+ ```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组</title>
+  </head>
+  <body>
+    <script>
+      /* 数组的定义 字面量方式 */
+      var arr = [21, 23, 4, 5, 67, 89, 2, 56, 99, 13, 40, 66]
+      /* 数组元素的拼接 */
+      console.log(arr.concat(100, 200, 300))
+      /* 检索数组中元素所在的下标 */
+      console.log(arr.indexOf(100))
+      /* 返回数组中元素最后一次所在位置的下标 */
+      console.log(arr.lastIndexOf(66))
+      /* 过滤数组中符合条件的元素 */
+      console.log(
+        arr.filter((a) => {
+          return a > 50
+        })
+      )
+      /* sort排序  必须需定义排序规则  由大到小还是由小到大 */
+      console.log(
+        arr.sort((a, b) => {
+          return a - b
+        })
+      )
+      /* 删除数组的最后一个元素并返回 */
+      console.log(arr.pop())
+      /* 数组的最后一位添加元素并返回数组的长度 */
+      console.log(arr.push(11111))
+      /* 数组元素的顺序反转 */
+      console.log(arr.reverse())
+      /* 移除数组的第一个元素并返回值 */
+      console.log(arr.shift())
+      /* 截取数组的一部分并返回新的数组 */
+      console.log(arr.slice(0, 4))
+      console.log(arr)
+      /* splice  有添加  删除 和替换三个功能 */
+      /* 从哪开始截取 截取几个元素  相当删除元素 */
+      console.log(arr.splice(2, 3))
+      console.log(arr)
+      /* 删除一个元素 在使用新的元素替换 */
+      console.log(arr.splice(2, 1, 99999))
+      console.log(arr)
+      /* 添加多个元素 */
+      console.log(arr.splice(4, 2, 99999, 8888, 6666))
+      console.log(arr)
+      /* 向数组的末尾追加元素 */
+      console.log(arr.splice(arr.length, 0, 1111, 222, 333))
+      console.log(arr)
+    </script>
+  </body>
+</html>
+
+ ```
+
+#### 4.2.5 String字符串
+
+> 在javascript 中字符串就是使用双引号或单引号包含任意长度的文本。
+
+**字符串的创建方式:**
+
+```html
+var str = new String("Hello Wolrd");
+简单方式创建字符串
+var str = "Hello World";
+```
+
+> 字符串对象的属性:
+>
+> + length 字符串的长度
+> + constructor 对该对象的函数引用
+> + prototype  原型属性 可以给对象添加属性和方法
+
+**字符串常用的方法:**
+
++ `charAt` 返回指定位置的字符
++ `charCodeAt` 返回指定位置的字符的Uinicode编码
++ `concat` 连接两个或者更多的字符串 返回新的字符串
++ `fromCharCode` 将Unicode编码转换为字符
++ `indexof` 指定字符首次出现的下标值
++ `lastIndexOf` 指定字符最后一次出现的下标值
++ `match` 查找找到一个或多个正则表达式的匹配。
++ `replace` 在字符串中查找匹配的子串， 并替换与正则表达式匹配的子串。
++ `search` 查找与正则表达式匹配的值
++ `splice` 截取字符串
++ `split` 按正则表达式将字符串风格为字符串数组
++ `startWith` 查看字符串是否以指定的子字符串开头。
++ `substr` 从起始索引号提取字符串中指定数目的字符。
++ `substring` 提取字符串中两个指定的索引号之间的字符。
++ `toLowerString` 转为小写
++ `toUpperCase` 转为大写
++ `trim` 去除字符串前后的空格
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>字符串</title>
+  </head>
+  <body>
+    <script>
+      /* 在JavaScript 中 单引号和双引号的都是字符串 */
+      var str = 'This is a very long string which needs IS'
+      /* 字符串拼接 */
+      console.log(str.concat(' Hello World'))
+      /* 返回指定下标位的字符值 */
+      console.log(str.charAt(10))
+      /* 返回指定字符的Unicode编码 */
+      console.log(str.charCodeAt('H'))
+      /* 返回指定字符第一次在字符串中出现的下标值 */
+      console.log(str.indexOf('l'))
+      /* 返回指定字符在字符串最后一次出现的下标值 */
+      console.log(str.lastIndexOf('o'))
+      /* 字符串下标位元素的unicode编码 */
+      console.log(str.codePointAt(4))
+      /* 字符串以什么结尾的  返回布尔值 */
+      console.log(str.endsWith('world'))
+      /* 字符串以什么开始的 */
+      console.log(str.startsWith('this'))
+      /* 全局检索 忽略大小写 */
+      console.log(str.match(/is/gi))
+      /* 匹配字符串的开始下标位置  没找到返回-1 */
+      console.log(str.search(/is/gi))
+      /* 替换字符串为新的字符串 */
+      console.log(str.replace('This', 'That'))
+      /* 截取字符串 */
+      console.log(str.slice(2, 10))
+      /* 匹配的正则表达式将字符串分割为字符串数组 */
+      console.log(str.split(' '))
+      /* 大写字母转换为小写的字母 */
+      console.log(str.toLocaleLowerCase())
+      /* 小的字母全转换为大写字母 */
+      console.log(str.toLocaleUpperCase())
+      /* 取消前后 的控股个 */
+      console.log('   Hello world  '.trim())
+    </script>
+  </body>
+</html>
+
+```
+
+#### 4.2.6 正则表达式
+
+> 正则表达式是描述字符模式的对象。
+>
+> 正则表达式用于对字符串模式匹配及检索替换，是对字符串执行模式匹配的强大工具。
+>
+> var patt=new RegExp(pattern,modifiers);
+>
+> 简单的方式
+>
+> var patt =  /pattern/modifiers;
+
+修饰符用于执行区分大小写和全局匹配:
+
+| 修饰符                                             | 描述                                                     |
+| :------------------------------------------------- | :------------------------------------------------------- |
+| [i](https://www.runoob.com/js/jsref-regexp-i.html) | 执行对大小写不敏感的匹配。                               |
+| [g](https://www.runoob.com/js/jsref-regexp-g.html) | 执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）。 |
+| m                                                  | 执行多行匹配。                                           |
+
+RegExp 对象方法
+
+| 方法                                                         | 描述                                               |
+| :----------------------------------------------------------- | :------------------------------------------------- |
+| [compile](https://www.runoob.com/jsref/jsref-regexp-compile.html) | 在 1.5 版本中已废弃。 编译正则表达式。             |
+| [exec](https://www.runoob.com/jsref/jsref-exec-regexp.html)  | 检索字符串中指定的值。返回找到的值，并确定其位置。 |
+| [test](https://www.runoob.com/jsref/jsref-test-regexp.html)  | 检索字符串中指定的值。返回 true 或 false。         |
+| [toString](https://www.runoob.com/jsref/jsref-regexp-tostring.html) | 返回正则表达式的字符串。                           |
+
+#### 4.2.7 Number
+
+> 在 JavaScript 里面，数字均为双精度浮点类型（[double-precision 64-bit binary format IEEE 754](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)），即一个介于±2−1023和±2+1024之间的数字，或约为±10−308到±10+308，数字精度为53位。整数数值仅在±(253 - 1)的范围内可以表示准确。
+
+| 属性              | 描述                                   |
+| :---------------- | :------------------------------------- |
+| constructor       | 返回对创建此对象的 Number 函数的引用。 |
+| MAX_VALUE         | 可表示的最大的数。                     |
+| MIN_VALUE         | 可表示的最小的数。                     |
+| NEGATIVE_INFINITY | 负无穷大，溢出时返回该值。             |
+| NaN               | 非数字值。                             |
+| POSITIVE_INFINITY | 正无穷大，溢出时返回该值。             |
+| prototype         | 允许您可以向对象添加属性和方法。       |
+
+| 方法                     | 描述                                                         |
+| :----------------------- | :----------------------------------------------------------- |
+| `Number.parseFloat()`    | 把字符串参数解析成浮点数， 和全局方法 [`parseFloat()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/parseFloat) 作用一致. |
+| `Number.parseInt()`      | 把字符串解析成特定基数对应的整型数字，和全局方法 [`parseInt()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/parseInt) 作用一致. |
+| `Number.isFinite()`      | 判断传递的值是否为有限数字。                                 |
+| `Number.isInteger()`     | 判断传递的值是否为整数。                                     |
+| `Number.isNaN()`         | 判断传递的值是否为 [`NaN`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/NaN). More robust version of the original global [`isNaN()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/isNaN). |
+| `Number.isSafeInteger()` | 判断传递的值是否为安全整数。                                 |
+
+```javascript
+ <script>
+      var num = 1000
+      console.log(num)
+      console.log(typeof num)
+      /* 最大值 */
+      console.log(Number.MAX_VALUE)
+      /* 字符串数字转换为Number类型 */
+      console.log(Number.parseInt('1234'))
+      /* 字符串浮点值转换为Number类型 */
+      console.log(Number.parseFloat('12.22'))
+   </script>
+```
 
 ## 5. BOM
+
+### 5.1 Window 对象
+
+> 所有浏览器都支持 *window* 对象。它代表浏览器的窗口。
+>
+> 所有全局 JavaScript 对象，函数和变量自动成为 window 对象的成员。
+>
+> 全局变量是 window 对象的属性。
+>
+> 全局函数是 window 对象的方法。
+>
+> 甚至（HTML DOM 的）document 对象也是 window 对象属性：
+
+**全局的作用域**
+
+```javascript
+  /* 声明全局的属性和方法 */
+      var age = 20
+      function show() {
+        console.log('hello world')
+      }
+      /* window是全局的对象 */
+      console.log(window.age)
+      console.log(this.age)
+      show()
+      window.show()
+      this.show()
+      /* this代表全局的对象window */
+      console.log(this)
+```
+
+**JavaScript弹窗:**
+
+> 弹窗在实际的项目开发中很少的使用，必须点中才能取消掉。弹窗在书写Js的代码中可以帮助我们检测项目中的错误。
+
+```javascript
+alert("Hello Wolrd")  //普通弹窗
+confirm() //带取消按钮的弹窗
+prompt() //带有输入框的弹窗
+```
+
+**window的常用属性:**
+
++ `screenLeft `窗口距离屏幕左边的大小  Opera 不支持
++ `screenTop` 窗口距离屏幕上边的大小
++ `screenX `窗口距离屏幕左边的大小
++ `screenY` 窗口距离屏幕上边的大小
+
+![image-20201102175052242](_media/image-20201102175052242.png)
+
++ `innerHeight` 返回窗口的文档显示区的高度。
++ `innerWidth` 返回窗口的文档显示区的宽度。
++ `outerHeight` 返回窗口的外部高度，包含工具条与滚动条。
++ `outerWidth` 返回窗口的外部宽度，包含工具条与滚动条。
++ `document.documentElement.clientHeight`  在页面上返回内容的可视高度（不包括边框，边距或滚动条）
++ `document.documentElement.clientWidth`  在页面上返回内容的可视宽度（不包括边框，边距或滚动条）
+
+>  Chrome 中，outerWidth、outerHeight 与innerWidth、innerHeight 返回相同的值，即视口（viewport）大小而非浏览器窗口大小。
+
+![img](_media/5cddf1b5bc92295065.png)
+
+**window常用方法:**
+
++ `alert`
++ `clearInterval`  取消由 setInterval() 设置的 timeout。
++ `clearTimeOut`  取消由 setTimeout() 方法设置的 timeout。
++ `close` 关闭浏览器窗口
++ `moveBy()` 移动指定像素
++ `moveTo()` 窗口左上角移动到指定的点
++ `resizeBy` 指定像素改变窗口大小
++ `resiseTo` 窗口调整到指定的宽和高
++ `setInterval`  按照指定的周期（以毫秒计）来调用函数或计算表达式。
++ `setTimeout` 在指定的毫秒数后调用函数或计算表达式。
++ `stop` 停止页面载入
 
 ## 6. DOM
 
