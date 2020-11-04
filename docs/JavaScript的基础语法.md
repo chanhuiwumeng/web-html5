@@ -1,4 +1,4 @@
-#  JavaScript的基本语法 :imp:
+#   JavaScript的基本语法 :imp:
 
 ## 1. JavaScript的基本使用方式
 
@@ -187,32 +187,33 @@ console.log(num);//undefined  未定义   就是变量存在但是没有值
 
 #### 2.5.1 数据类型的基础
 
+> typeof  查看数据的数据类型
+
 ![image-20201021171253393](_media/image-20201021171253393.png)
 > 数据类型的分类:
 >
 > **基本数据类型**:
 >
 > + undefined   未定义   变量声明了但是没有值.
->
-> + boolean   true/false
->
+>+ boolean   true/false
 > + Number   数字类型
+>  + 整数类型
+>   + 浮点类型 js在使用浮点类型进行运算的时候精度不能保证，所以要注意。
 >   + 正无穷大
 >   + 负无穷大
 >   + NaN  不是数字类型
 > + isNaN  is not a number 
->   
 > + String   字符串的值 只要被定义了就是不可变的
 >   + 与某些编程语言（例如C）不同，JavaScript字符串是不可变的。这意味着一旦创建了字符串，就无法对其进行修改。(MDN官网)
->
 > + bigint 
->   + 使用`BigInt`s，即使超出`Number`s的安全整数限制，您也可以安全地存储和操作大整数。
->
+>  + 使用`BigInt`s，即使超出`Number`s的安全整数限制，您也可以安全地存储和操作大整数。
 > + Symbol(Es6新添加的)
->
-> 结构类型:Object   function  数组 .....
->
-> 使用typeof 可以获取数据的数据类型
+> 
+>+ null 表示一个空的对象
+> 
+>结构类型:Object   function  数组 .....
+> 
+>使用typeof 可以获取数据的数据类型
 
 ```html
 <script>
@@ -245,6 +246,10 @@ console.log(num);//undefined  未定义   就是变量存在但是没有值
 
 #### 2.5.2 数据类型的转换
 
+> javascript中数据类型转换是将其他的数据类型转换为: String Number Boolean值
+>
+> 强制数据类型的转化: 将一个数据类型强制转换为其他的数据类型
+
 1. 转化为字符串类型
    + toString()
    + String()
@@ -252,6 +257,7 @@ console.log(num);//undefined  未定义   就是变量存在但是没有值
 
 ```html
 	<script>
+        //null 和 undefined 没有toString方法 如果使用会报错
       var num = 123
       console.log(num)
       console.log(num.toString()) //使用方法转为字符串
@@ -261,8 +267,11 @@ console.log(num);//undefined  未定义   就是变量存在但是没有值
 ```
 
 2. 转换为数值类型
-   + Number()  数字的字符串类型  包含不是数字的值就是NAN
+   + Number()  数字的字符串类型  包含不是数字的值就是NaN
    + Number.parseInt()  转换为整数类型
+     + 有的浏览器对进制的数字转换会有问题 
+       + `var num = 080; 有的会按照10进制转换 有的会按照二进制转换`
+     + `parseInt(数值,进制);`   Number.parseInt(080,10); 10进制转换数值
    + Number.parseFloat() 转换为浮点类型
    + \+ \-   进行拼接和运算后的结果是数字值
 
@@ -281,7 +290,7 @@ console.log(num);//undefined  未定义   就是变量存在但是没有值
 
 3. 转换为boolean类型
 
-> 0  ''(空字符串) null undefined NaN 会转换成false  其它都会转换成 true
+> 0  " "(空字符串) null undefined NaN 会转换成false  其它都会转换成 true
 
 ```html
 if (0) {
@@ -293,17 +302,26 @@ if (0) {
 
 ### 2.6 运算符
 
+> 通过运算符可以对一个或者多个值运行运算，并获取运算的结果
+
 #### 2.6.1 算数运算符
 
-| 运算符 | 描述              |
-| :----- | :---------------- |
-| +      | 加法 字符串的拼接 |
-| -      | 减法              |
-| *      | 乘法              |
-| /      | 除法              |
-| %      | 系数              |
-| ++     | 递加              |
-| --     | 递减              |
+| 运算符 | 描述                                                         |
+| :----- | :----------------------------------------------------------- |
+| +      | 加法 字符串的拼接  <br />任何数据类型的值和字符串运算结果都是字符串 |
+| -      | 减法                                                         |
+| *      | 乘法                                                         |
+| /      | 除法                                                         |
+| %      | 系数                                                         |
+| ++     | 递加                                                         |
+| --     | 递减                                                         |
+
++ 任何值和字符串相加结果都是字符串  字符串拼接操作
++ 给任意数据类型的值 + "" 加空的字符串就是拼接为 字符串 
++ 任何值做  - * / 运算都会换转换才能Number类型  
+  + `var num = '123'\*1; 转换为Number类型`
++ 可以对其他的值使用 + 转换为Number类型 (一元运算符)
+  + `var  result = 123 + + "123"+90;  `  这都是隐式的转换
 
 #### 2.6.2 赋值运算符
 
@@ -330,6 +348,21 @@ if (0) {
 | <=     | 小于或等于     |
 | ?      | 三元运算符     |
 
++ NaN 和任何值比较都是 false
++ 字符串比较是比较字符串的Unicode编码 但是会有问题
+  + 字符串字母比较 位数相同 unicode编码比较 位数相同时进位比较 
+  + （中文编码比较会有问题）汉字的编码顺序
+  +  数字的字符串在比较的时候一定要进行转型
+    + ``"11111111" < "5" 按照位比价 所以会有问题  进行转型  "111111" < +"5"``
++ NaN 不和任何值相等 包括自身
++ isNaN 检测是是否是NaN
+
+```javascript
+
+```
+
+
+
 #### 2.6.4 逻辑运算符
 
 | 运算符 | 描述   |
@@ -337,6 +370,24 @@ if (0) {
 | &&     | 逻辑与 |
 | \|\|   | 逻辑或 |
 | !      | 逻辑非 |
+
++ 可以通过将其他数据类型进行两次取反转换为布尔类型 (隐式转换)
+
+  + `console.log(!! "Hello");  结果为true`
+
++ && 短路与 前边不成立就会忽略后边的不去判断
+
+  + `非布尔值的运算 先将其转换为布尔值运算  在运算后返回结果的原值 `
+
+  + `第一个值是true返回第二个值`
+
+  + `第一个值是false 返回第一个值`
+
+  + `1&&2 返回 2  都是true 返回后边的值`
+
+  + `两个值中有false 返回fasle   都是false 返回前面的false`
+
+    
 
 #### 2.6.5 类型运算符
 
@@ -357,6 +408,10 @@ if (0) {
 | >>     | 有符号右位移 | 5 >> 1  | 0101 >> 1    | 0010 | 2      |
 | >>>    | 零填充右位移 | 5 >>> 1 | 0101 >>> 1   | 0010 | 2      |
 
+#### 2.6.7 JavaScript运算符的优先级
+
+[MDNJavaScript运算符的优先级](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
+
 ### 2.7 流程控制语句
 
 > 表达式: 一个表达式可以产生一个值，有可能是运算、函数调用、有可能是字面量。表达式可以放在任何需要值的地方。
@@ -364,6 +419,19 @@ if (0) {
 #### 2.7.1 顺序语句
 
 > 程序的默认执行流程就是从上到下。从左到右的执行。
+
+**代码块**
+
+```javascript
+{
+    /*在JavaScript当中代码块只有对代码分组的作用  并不能对代码进行隔离 和其他的编程语言不一样
+    	代码块中的代码对外部的代码是可见的、
+    */
+    var num = 100;
+}
+```
+
+
 
 #### 2.7.2 分支语句
 
@@ -1037,7 +1105,7 @@ function f1(){
       */
 ```
 
-### 3.8 his 关键字 :exclamation:
+### 3.8 this 关键字 :exclamation:
 
 > 面向对象语言中 this 表示当前对象的一个引用。
 >
@@ -1052,9 +1120,14 @@ function f1(){
 
 ## 4. JavaScript常用的对象和方法
 
+> `在开发中对象就是对属性和方法的封装，在使用和调用的时候很方便，直观理解`
+>
+> `在JavaScript中万事万物皆是对象，页面中的按钮，图片，表单，表格，超链接等等...`
+>
 > JavaScript 对象是拥有属性和方法的特殊数据类型:
 >
-> + 内置对象
+> + 内置对象  Strring Object Number Math Date Array  Regexp Function .....
+> + 宿主对象  浏览器提供的对象(Bom  Dom)
 > + 自定义对象
 >
 > 在 JavaScript中，几乎所有的事物都是对象。
@@ -1071,144 +1144,7 @@ function f1(){
 
 所有汽车都拥有这些方法，但是它们被执行的时间都不尽相同。
 
-### 4.1 自定义对象
-
-> 在javaScript中自定义对象有两种方式:
->
-> 1. 使用构造函数创建对象
-> 2. 使用字面量创建对象(ES6以后主要推荐使用)
-
-<font style="color:red;">**构造函数创建对象**</font>
-
-```javascript
-//构造函数名称首字母必须大写
-function Person(){
-    this.name = "joke";
-    this.age = 25;
-   	this.say = function(){
-        console.log("say hello world");
-    } 
-}
-//使用new关键字实例化对象
-var p1 = new Person();
-console.log(p1);
-console.log(p1.name);
-console.log(p1.age);
-p1.say();
- var p2 = new Person();
-console.log(p2);
-console.log(p2.name);
-console.log(p2.age);
-p2.say();
-```
-
-> 存在的问题对象的属性值都是相同 的。
-
-```javascript
-//构造函数名称首字母必须大写
-function Person(name,age){
-    this.name = name;
-    this.age = age;
-   	this.say = function(){
-        console.log("say hello world");
-    } 
-}
-//使用new关键字实例化对象
-var p1 = new Person("admin",88);
-console.log(p1);
-console.log(p1.name);
-console.log(p1.age);
-p1.say();
- var p2 = new Person("jjoke",99);
-console.log(p2);
-console.log(p2.name);
-console.log(p2.age);
-p2.say();
-```
-
-> 属性值可以通过实例对象时候的参数去指定
-
-```javascript
-//构造函数名称首字母必须大写
-function Person(){
-    this.name = "joke";
-    this.age = 25;
-   	this.say = function(){
-        console.log("say hello world");
-    } 
-}
-//使用new关键字实例化对象
-var p1 = new Person();
-console.log(p1);
-console.log(p1.name);
-console.log(p1.age);
-p1.say();
- var p2 = new Person();
-console.log(p2);
-console.log(p2.name);
-console.log(p2.age);
-p2.say();
-//比较两个对象之间的属性和方法
-console.log(p1 == p2);//false
-console.log(p1 === p2);//fasle
-console.log(p1.name === p2.name)//true
-console.log(p1.age === p2.age)//true
-console.log(p1.say == p2.say )//false
-console.log(p1.say === p2.say )//false
-
-```
-
-> 我们发现对象之间是不相同的，属性值是相同, 调用同一个方法 发现值是false。方法对于对象来说在构造函数中的方法，应该是各个对象来共享的。那么为什么不一样呢？
-
-![image-20201022233833310](_media/image-20201022233833310.png)
-
-> new 开辟 堆内存空间，内存地址不一样，所以方法在各自的内存中，不能共享
->
-> 怎么解决呢?
->
-> JavaScript提供了原型 就是来解决这一问题的
-
-<font style="color:red">**原型**</font>
-
-```javascript
-<script>
-      //构造函数名称首字母必须大写
-      function Person(name, age) {
-        this.name = name
-        this.age = age
-      }
-      //共享的方法
-      Person.prototype.say = function () {
-        console.log('Hello World')
-      }
-      //共享的属性
-      Person.prototype.address = '陕西省西安市'
-      //使用new关键字实例化对象
-      var p1 = new Person('admin', 88)
-      console.log(p1)
-      console.log(p1.name)
-      console.log(p1.age)
-      p1.say()
-      var p2 = new Person('joke', 99)
-
-      console.log(p2)
-      console.log(p2.name)
-      console.log(p2.age)
-      p2.say()
-      //比较两个对象之间的属性和方法
-      console.log(p1 == p2) //fasle
-      console.log(p1 === p2) //false
-      console.log(p1.name === p2.name) //fasle
-      console.log(p1.age === p2.age) //fasle
-      console.log(p1.say == p2.say) //true
-      console.log(p1.say === p2.say) //true
-      console.log(p1.address === p2.address) //true
-    </script>
-```
-
-> 原型链js高级部分讲解:
-
-### 4.2 内置对象
+### 4.1 内置对象
 
 > js中已经定义好的对象。
 >
@@ -1217,8 +1153,108 @@ console.log(p1.say === p2.say )//false
 #### 4.2.1 Object
 
 > 在JavaScript中，几乎所有的对象都是`Object`类型的实例，它们都会从`Object.prototype`继承属性和方法
->
-> 在高级部分重点讲解:
+
+**构造函数常见对象:**
+
+```javascript
+<script>
+      /* 创建爱Object的对象 */
+      var obj = new Object();
+      console.log(obj);
+      /* 为obj对象添加属性  通过使用.来添加属性 */
+      obj.name = 'admin';
+      obj.age = 88;
+      /* 通过对象.属性 来调用对象的属性 并使用 */
+      console.log(obj.name);
+      console.log(obj.age);
+
+      /* 如果使用不规则的属性名使用[]
+        不规则的属性还是尽量的少用， 不容易记住
+        不符合一般的使用习惯
+      */
+      obj['123'] = 'Hello World';
+      obj['@#$%'] = '你规则的属性名称使用';
+      console.log(obj['123']);
+      console.log(obj['@#$%']);
+
+      /*
+         使用变量名获取到对象的属性名 在获取到属性对应的值
+          这种方式在有些前端的框架中使用的比较的多
+      */
+      obj['address'] = '陕西省西安市';
+      var n = 'address';
+      console.log(obj[n]);
+      /* 在创建对象的时候  可以传入什么值那么创建出的就是声明数据类型的对象
+       对象的值就是传入的值 传入值的包装 */
+      var object = new Object('Hello World');
+      /* 等价于 var object = new String("Hello World") */
+
+      console.log(object);
+      object.num = '666';
+
+      console.log(object.toString());
+      console.log(object.valueOf());
+      console.log(object.num);
+
+      var obj2 = new Object(123);
+      console.log(obj2);
+      console.log(obj2.toString());
+      console.log(obj2.valueOf());
+
+      var obj3 = new Object(null);
+      console.log(obj3);
+      var obj4 = new Object(undefined);
+      console.log(obj4);
+
+      var obj5 = new Object(['a', 'b', 'c']);
+      console.log(obj5);
+      /* in 运算符 验证某一个对象是否有某一个属性
+       */
+      console.log('num' in object); //true
+      /* instanceof 检测某一个对象是否是属于哪一个构造函数的 */
+      console.log(object instanceof Object); //true
+ </script>
+```
+
+`在JavaScript的运算符优先级中() . [] new 排在最前面。`
+
+<font style="color:red;">**字面量创建对象:**</font>
+
+> ES6 新的创建对象的方式，更简便，使用也方便。
+
+```javascript
+<script>
+      /* 
+      字面量创建对象  ES6规定新的对象创建方式更简单
+      */
+      var obj = {};
+      obj.name = 'admin';
+      obj.age = 99;
+      console.log(obj);
+      console.log(obj.name);
+      console.log(obj.age);
+      /* 
+        传统的创建对象的方式只能先创建对在添加 属性和方法 有一些多余的步骤
+        字面量创建对象并添加属性和方法: 
+        a. 属性名可以加引号 可以不加引号 习惯的写法是不加引号
+        b. 属性名和属性值之间使用冒号隔开，属性和属性之间使用分号隔开
+        c. 最后一个属性结尾的位置不需要添加分号
+
+       */
+      var obj2 = {
+        name: 'joke',
+        age: 99,
+        teacher: {
+          teaName: '张三',
+          teaAge: 99,
+        },
+        say: function () {
+          console.log('say i love you');
+        },
+      };
+      console.log(obj2);
+    </script>
+```
 
 #### 4.2.2 Math
 
@@ -1359,10 +1395,10 @@ var myCars=["Saab","Volvo","BMW"];
 
 >  数组的属性: 
 >
-> + length 数组的长度，数组中元素的个数
+>  + length 数组的长度，数组中元素的个数
 >
-> + constuctor 返回数组的原型构造函数
-> + prototype 数组的原型
+>  + constuctor 返回数组的原型构造函数
+>  + prototype 数组的原型
 
 **数组对象常用的方法:**
 
@@ -1596,6 +1632,143 @@ RegExp 对象方法
       console.log(Number.parseFloat('12.22'))
    </script>
 ```
+
+### 4.2 自定义对象
+
+> 在javaScript中自定义对象有两种方式:
+>
+> 1. 使用构造函数创建对象
+> 2. 使用字面量创建对象(ES6以后主要推荐使用)
+
+<font style="color:red;">**构造函数创建对象**</font>
+
+```javascript
+//构造函数名称首字母必须大写
+function Person(){
+    this.name = "joke";
+    this.age = 25;
+   	this.say = function(){
+        console.log("say hello world");
+    } 
+}
+//使用new关键字实例化对象
+var p1 = new Person();
+console.log(p1);
+console.log(p1.name);
+console.log(p1.age);
+p1.say();
+ var p2 = new Person();
+console.log(p2);
+console.log(p2.name);
+console.log(p2.age);
+p2.say();
+```
+
+> 存在的问题对象的属性值都是相同 的。
+
+```javascript
+//构造函数名称首字母必须大写
+function Person(name,age){
+    this.name = name;
+    this.age = age;
+   	this.say = function(){
+        console.log("say hello world");
+    } 
+}
+//使用new关键字实例化对象
+var p1 = new Person("admin",88);
+console.log(p1);
+console.log(p1.name);
+console.log(p1.age);
+p1.say();
+ var p2 = new Person("jjoke",99);
+console.log(p2);
+console.log(p2.name);
+console.log(p2.age);
+p2.say();
+```
+
+> 属性值可以通过实例对象时候的参数去指定
+
+```javascript
+//构造函数名称首字母必须大写
+function Person(){
+    this.name = "joke";
+    this.age = 25;
+   	this.say = function(){
+        console.log("say hello world");
+    } 
+}
+//使用new关键字实例化对象
+var p1 = new Person();
+console.log(p1);
+console.log(p1.name);
+console.log(p1.age);
+p1.say();
+ var p2 = new Person();
+console.log(p2);
+console.log(p2.name);
+console.log(p2.age);
+p2.say();
+//比较两个对象之间的属性和方法
+console.log(p1 == p2);//false
+console.log(p1 === p2);//fasle
+console.log(p1.name === p2.name)//true
+console.log(p1.age === p2.age)//true
+console.log(p1.say == p2.say )//false
+console.log(p1.say === p2.say )//false
+
+```
+
+> 我们发现对象之间是不相同的，属性值是相同, 调用同一个方法 发现值是false。方法对于对象来说在构造函数中的方法，应该是各个对象来共享的。那么为什么不一样呢？
+
+![image-20201022233833310](_media/image-20201022233833310.png)
+
+> new 开辟 堆内存空间，内存地址不一样，所以方法在各自的内存中，不能共享
+>
+> 怎么解决呢?
+>
+> JavaScript提供了原型 就是来解决这一问题的
+
+<font style="color:red">**原型**</font>
+
+```javascript
+<script>
+      //构造函数名称首字母必须大写
+      function Person(name, age) {
+        this.name = name
+        this.age = age
+      }
+      //共享的方法
+      Person.prototype.say = function () {
+        console.log('Hello World')
+      }
+      //共享的属性
+      Person.prototype.address = '陕西省西安市'
+      //使用new关键字实例化对象
+      var p1 = new Person('admin', 88)
+      console.log(p1)
+      console.log(p1.name)
+      console.log(p1.age)
+      p1.say()
+      var p2 = new Person('joke', 99)
+
+      console.log(p2)
+      console.log(p2.name)
+      console.log(p2.age)
+      p2.say()
+      //比较两个对象之间的属性和方法
+      console.log(p1 == p2) //fasle
+      console.log(p1 === p2) //false
+      console.log(p1.name === p2.name) //fasle
+      console.log(p1.age === p2.age) //fasle
+      console.log(p1.say == p2.say) //true
+      console.log(p1.say === p2.say) //true
+      console.log(p1.address === p2.address) //true
+    </script>
+```
+
+> 原型链js高级部分讲解:
 
 ## 5. BOM
 
