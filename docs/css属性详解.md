@@ -1103,6 +1103,111 @@
 
 ```
 
+#### 4.1.2 背景的线性渐变
+
+> `linear-gradient(direction,clolr1,color2,clolr3,)`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>背景线性渐变</title>
+    <style>
+      div {
+        width: 300px;
+        height: 200px;
+        float: left;
+      }
+      div:first-child {
+        /* 线性渐变 默认是从上到下 */
+        background: linear-gradient(#fff, #333);
+      }
+      /* 从右下到左上 */
+      div:nth-child(2) {
+        background: linear-gradient(to left top, red 0%, gold 40%, green);
+      }
+      /* 渐变轴为 30deg  */
+      div:nth-child(3) {
+        background: linear-gradient(45deg, red 0%, gold 50%, green);
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <div></div>
+    <div></div>
+  </body>
+</html>
+
+```
+
+![image-20201105161406133](_media/image-20201105161406133.png)
+
+#### 4.1.3 背景的径向渐变
+
+```
+background-image: radial-gradient(shape size at position, start-color, ..., last-color);
+```
+
+| 值                             | 描述                                                         |
+| :----------------------------- | :----------------------------------------------------------- |
+| *shape*                        | 确定圆的类型:ellipse (默认): 指定椭圆形的径向渐变。circle ：指定圆形的径向渐变 |
+| *size*                         | 定义渐变的大小，可能值：farthest-corner (默认) : 指定径向渐变的半径长度为从圆心到离圆心最远的角closest-side ：指定径向渐变的半径长度为从圆心到离圆心最近的边closest-corner ： 指定径向渐变的半径长度为从圆心到离圆心最近的角farthest-side ：指定径向渐变的半径长度为从圆心到离圆心最远的边 |
+| *position*                     | 定义渐变的位置。可能值：**center**（默认）：设置中间为径向渐变圆心的纵坐标值。**top**：设置顶部为径向渐变圆心的纵坐标值。**bottom**：设置底部为径向渐变圆心的纵坐标值。 |
+| *start-color, ..., last-color* | 用于指定渐变的起止颜色。                                     |
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>径向渐变</title>
+    <style>
+      div {
+        width: 200px;
+        height: 200px;
+        float: left;
+      }
+      div:first-child {
+        background-image: radial-gradient(red, gold, green);
+      }
+      div:nth-child(2) {
+        background-image: radial-gradient(ellipse, red, gold, green);
+      }
+      div:nth-child(3) {
+        background-image: radial-gradient(
+          closest-side at 40%,
+          red,
+          gold,
+          green
+        );
+      }
+      div:nth-child(4) {
+        background-image: radial-gradient(
+          circle at 20% 20%,
+          red,
+          pink,
+          gold,
+          rgb(25, 110, 25)
+        );
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </body>
+</html>
+
+```
+
+![image-20201105164902680](_media/image-20201105164902680.png)
+
 ### 4.2 背景图片
 
 1. **background-img**
@@ -2005,6 +2110,60 @@ div:first-child {
 
 ![img](_media/608782-20160420200745726-1099998183.gif)
 
+### 7.3 镜像背面不可见:
+
+backface-visibility：**指定元素背面面向用户时是否可见**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>背面是否可见</title>
+    <style>
+      body {
+        /*  -webkit-perspective: 800px;
+        perspective: 800px;
+        -webkit-perspective-origin: 50%;
+        perspective-origin: 50%; */
+      }
+      div {
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        transition: all 5s ease;
+        transform-style: preserve-3d;
+        transform: rotateX(30deg) rotateY(30deg);
+      }
+      .box div:first-child {
+       /*  background: lawngreen; */
+      }
+      .box div:nth-of-type(2) {
+        background: url('https://img.alicdn.com/bao/uploaded/i4/50079713/O1CN011QQXyt2LcbY1Tz3RW_!!50079713.jpg_350x350q90.jpg_.webp');
+      }
+
+      .box:hover {
+        transform: rotateY(180deg);
+        backface-visibility: hidden;
+      }
+
+      .box:hover div:nth-of-type(2) {
+        /* 后面 不可见 */
+        -webkit-backface-visibility: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div>Hello WOlrd</div>
+      <div></div>
+    </div>
+  </body>
+</html>
+
+```
+
 ## 8. 动画
 
 > CSS3 可以创建动画，它可以取代许多网页动画图像、Flash 动画和 JavaScript 实现的效果。
@@ -2080,6 +2239,8 @@ div:first-child {
 > [Effect.css ](https://1stwebdesigner.com/css-effects/)
 >
 > [hover.css ](http://ianlunn.github.io/Hover/)
+>
+> [Three Docts](https://nzbin.github.io/three-dots/)
 
 ### 8.2 动画的帧数动画
 

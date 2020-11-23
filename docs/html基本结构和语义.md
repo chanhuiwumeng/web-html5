@@ -256,8 +256,9 @@ Bracket Pair Colorizer  括号加颜色
 
 auto  rename  tag  标签重命名
 
-
 vscode icons
+
+indent-rainbow
 
 ## 5. 文档
 

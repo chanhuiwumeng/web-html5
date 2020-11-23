@@ -610,6 +610,20 @@ vscode 安装less插件  easy-less
 }
 ```
 
+### 2.7 参数的默认值
+
+```less
+/*函数的变量的默认值*/
+
+.ul(@width:2px;@style;@color){
+  border: @width @style @color;
+}
+
+ul{
+  .ul(@style:solid;@color:pink)
+}
+```
+
 ## 3. Sass
 
 [Sass官网](https://www.sass.hk/)
@@ -933,7 +947,24 @@ a:visited { color: green; }
 
 > 相比于 sass 的激进和 less 的常规，Stylus 是一个高效、动态以及丰富的 CSS 预处理器。它同时支持缩进的和通俗的两种风格的 CSS 语法风格。
 
-## 5 . Flex伸缩盒
+## 5. Autoprefix
+
+> 自动添加css3前缀
+
+![image-20201123155422490](_media/image-20201123155422490.png)
+
+```json
+"autoprefixer.browsers" : [
+  "ie >= 6", 
+  "firefox >= 8",
+  "chrome >= 24",
+  "Opera>=10"
+],
+```
+
+
+
+## 6 . Flex伸缩盒
 
 [携程网](http://m.ctrip.com/html5/)
 
