@@ -962,7 +962,47 @@ a:visited { color: green; }
 ],
 ```
 
+![image-20201123162450101](_media/image-20201123162450101.png)
 
+```css
+div {
+  width: 200px;
+  height: 300px;
+  background: lawngreen;
+  -moz-animation: run 3s ease infinite;
+  -o-animation: run 3s ease infinite;
+  animation: run 3s ease infinite;
+  -webkit-animation: run 3s ease infinite;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@-webkit-keyframes run {
+  from {}
+
+  to {}
+}
+
+@-moz-keyframes run {
+  from {}
+
+  to {}
+}
+
+@-o-keyframes run {
+  from {}
+
+  to {}
+}
+
+@keyframes run {
+  from {}
+
+  to {}
+}
+```
 
 ## 6 . Flex伸缩盒
 
