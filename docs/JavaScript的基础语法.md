@@ -387,8 +387,6 @@ if (0) {
 
   + `两个值中有false 返回fasle   都是false 返回前面的false`
 
-    
-
 #### 2.6.5 类型运算符
 
 | 运算符     | 描述                                  |
@@ -430,8 +428,6 @@ if (0) {
     var num = 100;
 }
 ```
-
-
 
 #### 2.7.2 分支语句
 
@@ -530,8 +526,6 @@ do {
 } while (循环条件);
 ```
 
-
-
 **For循环:**
 
 > while和do...while一般用来解决无法确认次数的循环。for循环一般在循环次数确定的时候比较方便
@@ -550,6 +544,89 @@ for (初始化表达式1; 判断表达式2; 自增表达式3) {
 **Continue:**
 
 > **continue 语句**中断循环中的迭代，如果出现了指定的条件，然后继续循环中的下一个迭代。
+
+**循环的嵌套**
+
+```javascript
+ /* 外层循环控制行  内层循环控制列
+        每行结束进行换行
+       */
+      for (var i = 0; i < 10; i++) {
+        for (var k = 0; k < 10; k++) {
+          document.write('Hello \t');
+        }
+        document.write('<br>');
+      }
+```
+
+**九九乘法表**
+
+```javascript
+/* for (var i = 1; i <= 9; i++) {
+        for (var k = 1; k <= 9; k++) {
+          document.write(k + '*' + i + '=' + i * k + '\t');
+        }
+        document.write('<br>');
+      } */
+
+      for (var i = 1; i <= 9; i++) {
+        for (var k = 1; k <= i; k++) {
+          document.write(k + '*' + i + '=' + i * k + '&nbsp;');
+        }
+        document.write('<br>');
+      }
+```
+
+**水仙花数**
+
+```javascript
+ for (var i = 100; i < 1000; i++) {
+        //获取个位数
+        var a = i % 10;
+        //获取十位
+        var b = Number.parseInt((i / 10) % 10);
+        //获取百位数
+        var c = Number.parseInt(i / 100);
+
+        /* if (a * a * a + b * b * b + c * c * c == i) {
+          console.log(i + '  是水仙花数');
+        } */
+        /* 幂次方 */
+        if (Math.pow(a,3) + b * b * b + c * c * c == i) {
+          console.log(i + '  是水仙花数');
+        }
+      }
+```
+
+**等腰三角形**
+
+```javascript
+for (var i = 1; i <= 4; i++) {
+        //前半部分
+        for (var k = 4 - i; k > 0; k--) {
+          document.write('&ensp;');
+        }
+        //后半部分
+        for (var j = 1; j <= 2 * i - 1; j++) {
+          document.write('*');
+        }
+        document.write('<br>');
+      }
+```
+
+**鸡兔同笼**
+
+> 鸡兔同笼 共有头 35 脚94 鸡多少 兔多少
+
+```javascript
+//i为鸡的数量
+      for (var i = 0; i <= 35; i++) {
+        if (i * 2 + (35 - i) * 4 == 94) {
+          console.log('鸡的数量是:' + i);
+          console.log('兔的数量是:' + (35 - i));
+        }
+      }
+```
 
 **Chrome断点调试工具:**
 
