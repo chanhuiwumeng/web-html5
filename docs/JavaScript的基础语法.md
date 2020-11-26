@@ -632,7 +632,7 @@ for (var i = 1; i <= 4; i++) {
 
 ![image-20201022163807947](_media/image-20201022163807947.png)
 
-###2.8 数组(Array)
+### 2.8 数组(Array)
 
 > 所谓数组，就是将多个元素（通常是同一类型）按一定顺序排列放到一个集合中，那么这个集合我们就称之为数组.
 >
@@ -645,9 +645,35 @@ for (var i = 1; i <= 4; i++) {
 
 > 数组的声明方式:
 >
-> 1. var [] arr = new Array()[1,2,3,4,5];
-> 2. var [] arr = [2,3,4,5,6]
-> 3. 数组的元素和获取是通过数据下标来进行，数组的下标是从0开始
+> 1. 学习归变量 变量 只能保存一个值 
+>
+>       数组: 就是使用同一个变量保存多个值
+>
+>       js是一个弱数据类型的语言 所以在js的数组中 既可以保存多个值 并且值的数据类型可以不一样
+>
+> 2. 数组的声明 : 
+>
+>       var 变量名称 = new Array()[];
+>
+> 3. 数组是保存多个值 在获取数组中元素值的时候 或者 给数组中元素赋值的使用使用数组下标 (index)
+>
+>    ​    数组的下标是从0开始
+>
+>       数组下标位获取不到值就是undefined 未定义
+>
+>       //静态声明数组 定义数组的时候给定 值 由系统计算数组的程度
+>
+>       var arr = new Array(2, 3, 54, 56);
+>
+> 4. JAVASCRIPT中数组的长度是可扩增的。
+>
+>       我们可以通过length属性获取数组的长度
+>
+> 5. 数组的简化的声明方式: 
+>
+>       var arr = [2,3,4,5,6,7,8];
+>
+> 6. 但是在使用时候尽量保持一个数组中的数据类型一致
 
 ```javascript
 <script>
@@ -657,13 +683,25 @@ for (var i = 1; i <= 4; i++) {
       for (let index = 0; index < array.length; index++) {
         console.log(array[index])
       }
+ 	for (var i in arr) {
+        console.log(i);
+        console.log(arr[i]);
+      }
 </script>
 ```
 
 #### 2.8.2 **数组的最值:**
 
 ```javascript
-
+ var arr = [2, 24, 13, 45, 8, 99, 66, 41];
+      /* 求数组中元素的最值  最大值 最小值 */
+      var num = arr[1];
+      for (var i in arr) {
+        if (num < arr[i]) {
+          num = arr[i];
+        }
+      }
+      console.log('最大值就是:' + num);
 ```
 
 #### 2.8.3 **数组的排序:**
@@ -677,8 +715,94 @@ for (var i = 1; i <= 4; i++) {
 > + 归并排序
 > + 希尔排序
 
-```javascript
+**冒泡排序:**
 
+```javascript
+*/
+      /* 不论任何的排序方式我们首先要确定 排序的规则: 升序 降序
+      1、 冒泡排序 
+          数组中 元素之间两两进行比较 ， 按照排序的规则进行换位
+          
+    */
+      var arr = [21, 2, 34, 56, 4, 53, 67, 88, 8, 70];
+      //外层循环控制比较的次数
+      /* for (var i = 0; i < arr.length-1; i++) {
+        //内层循环之间两两比较
+        for (var k = 0; k < arr.length-1; k++) {
+          if(arr[k] > arr[k+1]){
+            var  temp = arr[k];
+            arr[k] = arr[k+1];
+            arr[k+1] = temp;
+          }
+        }
+      } */
+      //代码的比较次数减少  效率提交
+      for (var i = 0; i < arr.length - 1; i++) {
+        //内层循环之间两两比较
+        for (var k = 0; k < arr.length - 1 - i; k++) {
+          if (arr[k] > arr[k + 1]) {
+            var temp = arr[k];
+            arr[k] = arr[k + 1];
+            arr[k + 1] = temp;
+          }
+        }
+      }
+      //效果 一样  考虑代码的优化 性能和时间
+      //在看排序后的结果值
+      console.log(arr);
+```
+
+**选择排序:**
+
+```javascript
+var arr = [21, 2, 34, 56, 4, 53, 67, 88, 8, 70];
+      /* for (var i = 0; i < arr.length; i++) {
+        for (var k = 0; k < arr.length; k++) {
+          if (arr[k] > arr[i]) {
+            var temp = arr[k];
+            arr[k] = arr[i];
+            arr[i] = temp;
+          }
+        }
+      } */
+      //代码有没有问题
+      //从外层下标位的下一个元素参与比较
+      for (var i = 0; i < arr.length - 1; i++) {
+        for (var k = i + 1; k < arr.length; k++) {
+          if (arr[k] > arr[i]) {
+            var temp = arr[k];
+            arr[k] = arr[i];
+            arr[i] = temp;
+          }
+        }
+      }
+      console.log(arr);
+```
+
+**插入排序:**
+
+```javascript
+/* 插入排序: 
+        生活中玩扑克牌。 给你一副牌怎么整理的。
+        在数组的排序中呢?
+    */
+      var arr = [21, 2, 34, 56, 4, 53, 67, 88, 8, 70];
+
+      for (var i = 0; i < arr.length - 1; i++) {
+        //获取下一个元素
+        var temp = arr[i + 1];
+        //获取当前的下标位
+        var index = i;
+
+        while (index >= 0 && temp < arr[index]) {
+          arr[index + 1] = arr[index];
+          index--;
+        }
+        //console.log(index);
+        // while循环中index多运算一次  -1
+        arr[index + 1] = temp;
+      }
+      console.log(arr);
 ```
 
 ## 3. 函数(Function)

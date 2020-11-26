@@ -1594,7 +1594,40 @@ div:first-child {
       }
 ```
 
+### 4.6 背景裁剪
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body {
+        background: url('https://img.alicdn.com/imgextra/i3/6000000006395/O1CN01DgRinE1x6xTfiZ5gA_!!6000000006395-0-octopus.jpg') no-repeat;
+        background-size: cover;
+      }
+      div {
+        width: 300px;
+        height: 300px;
+        border: 40px solid hsla(0, 0%, 100%, 0.4);
+        background: lightgray;
+        padding: 20px;
+        /*沿着边框裁剪掉*/
+        background-clip: padding-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>
+
+```
+
+<img src="_media/image-20201125175230531.png" width="300px">
 
 ## 5. 文字和文本
 
