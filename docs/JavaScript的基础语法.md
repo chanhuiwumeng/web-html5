@@ -1061,6 +1061,51 @@ show(200)()//返回值的函数执行;
 </script>
 ```
 
+**注册的练习: return 用法**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form method="POST">
+      <input type="text" name="username" id="username" /><br />
+
+      <input type="password" name="password" id="password" /><br />
+      <input type="text" name="email" id="email" /><br />
+      <input type="button" value="注册" onclick="sub()" />
+    </form>
+    <script>
+      //表单验证
+      function sub() {
+        var username = document.querySelector('#username').value;
+        var pass = document.querySelector('#password').value;
+        var email = document.querySelector('#email').value;
+        if (username.length < 6 || username.length > 12) {
+          console.log('用户名长度必须在6-12位');
+          return false;
+        }
+        if (pass.length < 6 || pass.length > 12) {
+          console.log('密码长度必须在6-12位');
+          return false;
+        }
+        var regexp = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+        if (!regexp.test(email)) {
+          console.log('邮箱格式不正确');
+          return false;
+        }
+        console.log('------------表单的提交操作-------------');
+      }
+    </script>
+  </body>
+</html>
+
+```
+
 ### 3.5 块级作用域 :exclamation:
 
 > 任何一对花括号（｛和｝）中的语句集都属于一个块，在这之中定义的所有变量在代码块外都是不可见的，我们称之为块级作用域。
