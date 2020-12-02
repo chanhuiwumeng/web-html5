@@ -1290,6 +1290,28 @@ function f1(){
       doThings.doSomething()
 ```
 
+#### 3.6.5 闭包和变量
+
+```javascript
+unction show() {
+        var result = new Array();
+        //i就是show的局部变量
+        for (var i = 0; i <= 9; i++) {
+          result[i] = function (num) {
+            return (function () {
+              return num;
+            })(i);
+          };
+        }
+        return result;
+      }
+      var fun = show();
+      console.log(fun);
+      setInterval(() => {}, 1000);
+
+      /* 只会显示最终的值 */
+```
+
 ### 3.7 预解析
 
 > JavaScript代码的执行是由浏览器中的JavaScript解析器来执行的。JavaScript解析器执行JavaScript代码的时候，分为两个过程：预解析过程和代码执行过程。在当前的作用域之下
@@ -1299,7 +1321,7 @@ function f1(){
 >
 > 1. 把变量的声明提升到当前作用域的最前面，只会提升声明，不会提升赋值。
 > 2. 把函数的声明提升到当前作用域的最前面，只会提升声明，不会提升调用。
-> 3. 先提升var，在提升function。
+> 3. 先提升fucntion，在提升var。
 
 #### 3.7.1 变量的提示
 
@@ -1852,6 +1874,68 @@ RegExp 对象方法
 | [exec](https://www.runoob.com/jsref/jsref-exec-regexp.html)  | 检索字符串中指定的值。返回找到的值，并确定其位置。 |
 | [test](https://www.runoob.com/jsref/jsref-test-regexp.html)  | 检索字符串中指定的值。返回 true 或 false。         |
 | [toString](https://www.runoob.com/jsref/jsref-regexp-tostring.html) | 返回正则表达式的字符串。                           |
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>正则表达式</title>
+  </head>
+  <body>
+    <script>
+      /* regexp 正则表达式对象
+        对象用于将文本与一个模式匹配。  
+        邮箱  身份证  手机号  字符串长度匹配
+
+       */
+      var regexp = new RegExp('[a-z]');
+      if (regexp.test('123')) {
+        console.log('数据匹配');
+      } else {
+        console.log('数据不匹配');
+      }
+
+      /* var regexp1 = /[a-z]/;
+      if (regexp1.test('123')) {
+        console.log('数据匹配');
+      } else {
+        console.log('数据不匹配');
+      } */
+      //转义字符
+      var regexp1 = /\'/;
+      if (regexp1.test("1'3")) {
+        console.log('数据匹配');
+      } else {
+        console.log('数据不匹配');
+      }
+      //^ 开始的位置  $结束的位置
+      //var regexp2 = /^a$/;
+      //* abc零次或者多次
+      //+ 一次或者多次
+      // g 全文搜索
+      //i 忽略大小写
+      //m 多行搜索
+      //var regexp2 = /abc+/i;
+      //{n,m} 字符或者字母的个数 最少n 最多m个
+      //var regexp2 = /[a-zA-Z0-9]{2,4}/;
+      //非空白的字符
+      //var regexp2 = /\S{6,12}/;
+      //要求用户名不能包含中文 长度是6-12 a-z之间
+      //var regexp2 = /[a-zA-Z0-9]{6,12}\S/g;
+      //邮箱验证的
+      var regexp2 = /^[a-z0-9]+@[a-z0-9]+.[a-z]+/;
+      if (regexp2.test('523458@qq.com')) {
+        console.log('是以a开始的');
+      }
+    </script>
+  </body>
+</html>
+
+```
+
+
 
 #### 4.2.7 Number
 
