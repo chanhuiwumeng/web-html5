@@ -380,5 +380,203 @@
   
 ```
 
-  
+### 2.6 表单验证
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表单验证</title>
+	</head>
+	<body>
+		<form action="">
+			<label for="name">用户名:</label>
+			<input type="text" name="name" id="name">
+			<span id="namespan"></span>
+			<br>
+			<label for="password">密&ensp;&ensp;码:</label>
+			<input type="text" name="password" id="password">
+			<span id="passspan"></span>
+			<br>
+			<label for="email">用户名:</label>
+			<input type="text" name="email" id="email">
+			<span id="emailspan"></span>
+			<br>
+			<input type="button" value="提交"> <input type="reset" value="重置">
+		</form>
+			<script src="./js/jquery-3.1.1.min.js"></script>
+			<script>
+				$(function(){
+					$("[type='button']").click(()=>{
+						//获取输入框的值
+						let name = $("#name").val();
+						let password = $("#password").val();
+						let email = $("#email").val();
+						/* 首先判断输入框的值不能为空 */
+						if(name===""){
+							/* $("#namespan").text("用户名不能为空");
+							$("#namespan").css("color","red"); */
+							/* 对同一个对象操作就可以使用链式编程 */
+							$("#namespan").text("用户名不能为空").css("color","red");
+							/* 终止程序 */
+							return false;
+						}else{
+							$("#namespan").text("用户名可用").css("color","green");
+						}
+						if(password===""){
+							$("#passspan").text("密码不能为空").css("color","red");
+							return false;
+						}else{
+							$("#passspan").text("密码可用").css("color","green");
+						}
+						if(email===""){
+							$("#emailspan").text("邮箱不能为空").css("color","red");
+							return false;
+						}else{
+							let regexp = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+							if(regexp.test(email)){
+								$("#emailspan").text("邮箱格式正确").css("color","green");
+							}else{
+								$("#emailspan").text("邮箱格式不正确").css("color","red");
+							}
+						}
+						/* 数据校验通过在进行提交 */
+						$("form").attr("action","http://www.baidu.com").submit();
+						
+					})
+				})
+			</script>
+	</body>
+</html>
+
+```
+
+### 2.7 选项卡
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>选项卡</title>
+		<style>
+			/* 初始化 */
+			body,html,ul,li,a,img{
+				margin: 0;
+				padding: 0;
+			}
+			ul{
+				list-style: none;
+			}
+			a{
+				text-decoration: none;
+			}
+			div{
+				width: 500px;
+				height: 150px;
+			}
+			ul{
+				width: 100%;
+				height: 100%;
+				z-index: 99;
+			}
+			ul li{
+				width: 125px;
+				height: 150px;
+				box-sizing: border-box;
+				float: left;
+				padding: 15px 20px;
+				border: 1px solid #f5f5f5;
+			}
+			ul li a{
+				display: inline-block;
+				width: 100%;
+				height: 100%;
+			}
+			ul li a {
+				background: url("https://img.alicdn.com/tfs/TB1eiXTXlTH8KJjy0FiXXcRsXXa-24-595.png") 0 0 no-repeat;
+				background-size: 80px ;
+			}
+			ul li a:first-child{
+				background-position:0 20px;
+			}
+			ul li:nth-child(2) a{
+				background-position:0px -130px;
+			}
+			ul li:nth-child(3) a{
+				background-position:0px -270px;
+			}
+			ul li:nth-child(4) a{
+				background-position:0px -420px;
+			}
+			.infos{
+				position: absolute;
+				width: 500px;
+				height: 300px;
+				border: 1px solid red;
+				margin-top: -3px;
+				display: none;
+				z-index: -2;
+			}
+			.actve{
+				display: block;
+				border-top: 1px solid red;
+				border-right: 1px solid red;
+				border-left: 1px solid red;
+				border-bottom: 5px solid #fff;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="list">
+			<ul>
+				<li><a href=""></a></li>
+				<li><a href=""></a></li>
+				<li><a href=""></a></li>
+				<li><a href=""></a></li>
+			</ul>
+		</div>
+		<div class="infos">
+			<p>one tag list</p>
+		</div>
+		<div class="infos">
+			<p>two tag list</p>
+		</div>
+		<div class="infos">
+			<p>three tag list</p>
+		</div>
+		<div class="infos">
+			<p>four tag list</p>
+		</div>
+		<div class="infos">
+			<p>five tag list</p>
+		</div>
+		<script src="./js/jquery-3.1.1.min.js"></script>
+		<script>
+		let lis = 	$("ul>li");
+		let infos = $(".infos");
+		lis.each((index,item)=>{
+			$(item).mouseenter(()=>{
+				$(item).addClass('actve').siblings("li").removeClass("actve");
+				/* 等于下标的元素怒 */
+				let info = $(".infos:eq("+index+")").css("display","block")
+				$(".infos").not($(".infos:eq("+index+")"))
+				.css("display","none")
+				
+			})
+			/* $(item).mouseleave(()=>{
+						$(item).addClass("actve")
+						$(item).siblings("li").removeClass("actve")
+				let info = $(".infos:eq("+index+")").css("display","block")
+			}) */
+		});
+		</script>
+	</body>
+</html>
+
+```
+
+
 
