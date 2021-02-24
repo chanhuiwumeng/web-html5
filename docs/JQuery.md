@@ -129,5 +129,151 @@
 
 #### 2.2.2 选择器
 
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>jquery选择器</title>
+	</head>
+	<body>
+		<div></div>
+		<div id="main"></div>
+		<div class="core"></div>
+		<div>
+			<p>Hello WOrld</p>
+		</div>
+		<div class="list">
+			<ul>
+				<li>Hello 1</li>
+				<li>Hello 2</li>
+				<li>Hello 3</li>
+				<li>Hello 4</li>
+				<li>Hello 5</li>
+			</ul>
+		</div>
+		<input type="radio" name="" id="" checked="">
+		<script type="text/javascript" src="./js/jquery-3.1.1.min.js">
+		</script>
+		<script>
+			/* jquery选择器 */
+			$(()=>{
+				/* 获取所有的元素 */
+				let div = $("div");
+				console.log(div);
+				let div1 = $("#main");
+				console.log(div1);
+				let div2 = $(".core");
+				console.log(div2);
+				let div3 = $("div>p");
+				console.log(div3);
+				let div4 = $(".list >ul");
+				console.log(div4);
+				let div5 = $(".list >ul >li");
+				console.log(div5);
+				let div6 = $(".list>ul>li:first");
+				console.log(div6);
+				let div7 = $(".list>ul>li:first-child");
+				console.log(div7);
+				
+				let div8 = $(".list>ul>li:nth-child(3)");
+				console.log(div8);
+				/* 奇数 */
+				let div9 = $(".list>ul>li:even");
+				console.log(div9);
+				/* 偶数 */
+				let div10 = $(".list>ul>li:odd");
+				console.log(div10);
+				/* 大于3 下标 */
+				let div11 = $(".list>ul>li:gt(3)");
+				console.log(div11);
+				
+				let div12 = $(".list>ul>li:lt(3)");
+				console.log(div12);
+				/* 下标等于的 */
+				let div13 = $(".list>ul>li:eq(3)");
+				console.log(div13);
+				/* 排序元素 */
+				let div14 = $(".list>ul>li:not(:first)");
+				console.log(div14);
+				
+				let div15 = $(".list>ul>li:eq(3)").next();
+				console.log(div15);
+				/* 属性选择器 */
+				let div16 = $("div[id='main']");
+				console.log(div16);
+				
+				let inp = $("input:checked");
+				console.log(inp);
+			})
+		</script>
+	</body>
+</html>
+
+```
+
+### 2.3.css样式
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>css</title>
+		<style>
+			.active{
+				color: #7CFC00;
+				font-size: 20px;
+				font-family: "microsoft yahei";
+				font-weight: 700;
+			}
+		</style>
+	</head>
+	<body>
+		<button type="button">点击事件</button>
+		<div></div>
+		<p>当你使用CSS属性在css()或animate()中，我们将根据浏览器自动加上前缀(在适当的时候)</p>
+		<input type="text" name="name" id="" value="12345666666" />
+		<script type="text/javascript" src="./js/jquery-3.1.1.min.js">
+		</script>
+		<script>
+			let div = $("div");
+			/* 定义样式  行内样式*/
+			/* 定义一个属性 */
+			div.css("width","200px");
+			/* 定义多个样式属性 */
+			div.css({"height":"200px","background":"red","opacity":"0.5"});
+			let p =$("p");
+			/* 添加外部的样式 */
+				p.addClass('active');
+				p.removeClass('active');
+				/* jquery和DOM相结合使用 */
+			let btn = $("button")[0];
+			btn.onclick=()=>{
+				/* 有样式就移除  没有就添加 */
+				p.toggleClass("active");
+			}	
+			/* innerHTML */
+			/* 填充html */
+			p.html("<span>Hello</span>")	
+			/* 填充文本 */
+			p.text("12345677");	
+			/* 获取值   赋值*/
+		let inpt = $("[name='name']");
+			console.log(inpt.val());
+			/* 重新赋值 */
+			inpt.val("99999999999999");
+			/* 属性操作 */
+			inpt.attr("name","username");
+			/* 多个属性 */
+			inpt.attr({"type":"password","readonly":"true"})
+			/* 移除属性 */
+			inpt.removeAttr("readonly");
+		</script>
+	</body>
+</html>
+
+```
+
 
 
