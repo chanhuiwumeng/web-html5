@@ -13,7 +13,7 @@
   * [一. JavaScript基础知识](JavaScript基础知识.md)
   * [二. JavaScript基础语法](JavaScript的基础语法.md)
   * [三.JavaScript高级知识](JavaScript高级知识.md)
-* [四.JQuery](JQuery.md)
+* [四.JQuery学习](JQuery.md)
   
 * **第四章 移动端开发**
   * [一.视口](聊聊像素.md)
