@@ -2189,11 +2189,112 @@ prompt() //带有输入框的弹窗
 
 ## 6. DOM
 
+> DOM（Document Object Model——文档对象模型）是用来呈现以及与任意 HTML 或 XML文档交互的API。DOM 是载入到浏览器中的文档模型，以节点树的形式来表现文档，每个节点代表文档的构成部分（例如:页面元素、字符串或注释等等）
+>
+> DOM树
+
+![image-20210223141239607](_media/image-20210223141239607.png)
+
+## 6.1 获取页面的html元素
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>获取页面元素和节点</title>
+	</head>
+	<body>
+		<div id="main" class="core"></div>
+		<p class="core">Heloo Wolrd</p>
+		<ul>
+			<li><a href="">百度一下</a></li>
+			<li><a href="">百度一下</a></li>
+			<li><a href="">百度一下</a></li>
+		</ul>
+		<script>
+			//通过js去改变页面元素的样式或者添加行为 
+			//通过Js动态改变元素的样式
+			//获取页面的元素
+			console.log(document);
+			/* 通过元素的id选择器获取元素 */
+			//let div = document.getElementById("main");
+			/* 复数 类数组 */
+			//let div = document.getElementsByClassName("core")[0];
+			/* 类数组 */
+			//let div = document.getElementsByTagName("div")[0];
+			//更高级更灵活的写法 css的选择器就可以  querySelector 获取多个相同选择器的第一个元素
+			//let div = document.querySelector("#main");
+			let div = document.querySelector(".core");
+			
+			console.log(div);
+			/* 行内样式 */
+			div.style.width = "200px";
+			div.style.height = "200px";
+			div.style.border = "1px solid red";
+			
+			let a = document.querySelector("ul > li:nth-child(2) > a");
+			a.style.color = "red";
+			let aa = document.querySelector("ul > li:first-child >a");
+			aa.style.color = "gold";
+			//获取相同选择器的所有元素
+			let list = document.querySelectorAll("li");
+			list.forEach((a)=>{
+				a.style.background = "green";
+			})
+		</script>
+	</body>
+</html>
+
+```
 
 
 
+## 6.2 DOM的节点
 
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>节点</title>
+	</head>
+	<body>
+		<p>如需更多有关 JavaScript 对象的知识，请阅读 JavaScript 高级教程中的相关内容：</p><h1>HelloWorld</h1>
+		<!-- 节点  node -->
+		<script>
+			let p = document.querySelector("body");
+			console.log(p.nodeName);
+			/* 获取元素的子节点 操作节点的话太累了 */
+			console.log(p.childNodes);
+			
+			
+			let p1 = document.querySelector("p");
+			let h1 = document.querySelector("h1");
+			
+				console.log(p1);
+				console.log(h1.textContent);
+				p.insertBefore(h1,p1)
+				console.log(h1.textContent);
+				/* 根节点就是document */
+				console.log(p.getRootNode());
+			/* 操作元素 */
+		</script>
+	</body>
+</html>
 
+```
+
+### 6.3 Element
+
++ 元素的获取
++ 元素样式的改变
++ 元素的动态创建
++ 元素的属性改变
++ 移除元素
++ .....
+
+### 6.4 事件
 
 
 
