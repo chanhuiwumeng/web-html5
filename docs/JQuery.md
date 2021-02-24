@@ -4,6 +4,8 @@
 
 ![image-20210224104338061](_media/image-20210224104338061.png)
 
+[jquery官方学习网站](https://learn.jquery.com/about-jquery/how-jquery-works/)
+
 ## 1. 下载jquery库
 
 ![image-20210224111304765](_media/image-20210224111304765.png)
@@ -275,5 +277,108 @@
 
 ```
 
+### 2.4 Jquery事件
 
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>事件</title>
+		<style>
+			div{
+				width: 300px;
+				height: 300px;
+				display: none;
+				background: lawngreen;
+			}
+		</style>
+	</head>
+	<body>
+		<button>点击看看</button>
+		<div></div>
+		<script type="text/javascript" src="./js/jquery-3.1.1.min.js">
+		</script>
+		<script type="text/javascript">
+			/* 第一种事件添加的方式 */
+			/* $("button").on("click",function(){
+				$("body").css("background","#f5f5f5")
+			}); */
+			/* $("button").click(function(){
+				$("body").css("background","red")
+				}); */
+			/* $("button").hover(function(){
+				$("body").css("background","#666")
+			})	 */
+			$("button").click(function(){
+				$("div").toggle("fast")
+			})
+		</script>
+	</body>
+</html>
+
+```
+
+### 2.5 效果
+
++ 显示隐藏
+
++ 淡入淡出
+
++ 下拉上啦
+
+```html
+  <!DOCTYPE html>
+  <html>
+  	<head>
+  		<meta charset="utf-8">
+  		<title>效果</title>
+  		<style>
+  			div{
+  				position: relative;
+  				width: 300px;
+  				height: 300px;
+  				background: lawngreen;
+  				display: block;
+  			}
+  		</style>
+  	</head>
+  	<body>
+  		<button>button</button>
+  		<div></div>
+  		<script src="./js/jquery-3.1.1.min.js"></script>
+  		<script>
+  			$("button").click(()=>{
+  				//隐藏
+  				//$("div").hide();
+  				//$("div").show();
+  				/* 显示就隐藏 隐藏就显示 */
+  				//$("div").toggle()
+  				//$("div").slideDown();
+  				//$("div").slideUp();
+  				/* $("div").slideToggle(3000,function(){
+  					$("body").css("background","pink");
+  				}) */
+  				/* 淡入淡出 */
+  				//$("div").fadeIn(3000);
+  				//$("div").fadeOut(3000);
+  				//$("div").fadeToggle();
+  				
+  				/* 动画 */
+  				$("div").animate({"left":"200px","top":"150px"},3000);
+  				$("div").mouseenter(()=>{
+  					$("div").stop();
+  				})
+  				$("div").mouseleave(()=>{
+  					console.log("------------");
+  					$("div").animate({"left":"200px","top":"150px"},3000);
+  				})
+  			})
+  		</script>
+  	</body>
+  </html>
+  
+```
+
+  
 
