@@ -578,5 +578,171 @@
 
 ```
 
+### 2.8 文档处理
 
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>文档处理</title>
+	</head>
+	<body>
+		<ul>
+			<li>Hello</li>
+		</ul>
+		<p></p>
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+		<script>
+			$(function(){
+				let ul = 	$("ul");
+					for(let i =0;i<=5;i++){
+						/* 向末尾追加 */
+						//ul.append("<li><a href='#'>百度一下</a></li>")
+						/* 前置添加 */
+						ul.prepend("<li><a href='#'>百度一下</a></li>")
+					}
+					/* 将指定元素添加到什么元素内部 */
+				//ul.appendTo($("p"))	
+				let as = $("a");
+				/* 向后面添加元素 */
+				as.after("<span></span>");
+				
+				$("<section></section>").replaceAll(ul)	
+			})
+		</script>
+	</body>
+</html>
+
+```
+
+## 3.AJAX  异步的请求
+
+> Ajax 即“**A***synchronous* **J***avascript* ***A\****nd* **X***ML*”（异步 JavaScript 和 XML），是指一种创建交互式、快速动态[网页](https://baike.baidu.com/item/网页/99347)应用的网页开发技术，无需重新加载整个网页的情况下，能够更新部分网页的技术。
+>
+> 通过在后台与服务器进行少量数据交换，Ajax 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。
+
+### 3.1 原生的AJAX使用
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>ajax</title>
+	</head>
+	<body>
+		<button>点击发送AJAX请求</button>
+		<script>
+			document.querySelector("button").onclick=function(){
+				//1.创建XMLHttpRequest对象
+				var xmlhttp;
+				if (window.XMLHttpRequest)
+				  {// code for IE7+, Firefox, Chrome, Opera, Safari
+				  xmlhttp=new XMLHttpRequest();
+				  }
+				else
+				  {// code for IE6, IE5
+				  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				  }
+				  //2.打开连接
+				  xmlhttp.open("GET","a.txt",true);
+				  //3.发送请求
+				  xmlhttp.send();
+				  //获取请求响应状态码
+				  xmlhttp.onreadystatechange = function(){
+					  //响应成功
+					  if(xmlhttp.readyState==4){
+						  if(xmlhttp.status==200){
+							  //5.处理响应的数据
+							  console.log(xmlhttp.responseText);
+						  }
+					  }
+				  }
+			}
+		</script>
+	</body>
+</html>
+
+```
+
+## 4.JSON
+
+> [JSON](https://baike.baidu.com/item/JSON)([JavaScript](https://baike.baidu.com/item/JavaScript) Object Notation, JS 对象简谱) 是一种轻量级的数据交换格式。它基于 [ECMAScript](https://baike.baidu.com/item/ECMAScript) (欧洲计算机协会制定的js规范)的一个子集，采用完全独立于编程语言的文本格式来存储和表示数据。简洁和清晰的层次结构使得 JSON 成为理想的数据交换语言。 易于人阅读和编写，同时也易于机器解析和生成，并有效地提升网络传输效率。
+
+### JSON 与 JS 对象的关系
+
+很多人搞不清楚 JSON 和 JS 对象的关系，甚至连谁是谁都不清楚。其实，可以这么理解：
+
+**JSON 是 JS 对象的字符串表示法，它使用文本表示一个 JS 对象的信息，本质是一个字符串。**
+
+```
+var` `obj = {a: ``'Hello'``, b: ``'World'``}; ``//这是一个对象，注意键名也是可以使用引号包裹的
+var` `json = ``'{"a": "Hello", "b": "World"}'``; ``//这是一个 JSON 字符串，本质是一个字符串
+```
+
+### JSON 和 JS 对象互转
+
+要实现从JSON字符串转换为JS对象，使用 JSON.parse() 方法：
+
+```
+var` `obj = JSON.parse(``'{"a": "Hello", "b": "World"}'``); ``//结果是 {a: 'Hello', b: 'World'}
+```
+
+要实现从JS对象转换为JSON字符串，使用 JSON.stringify() 方法：
+
+```
+var` `json = JSON.stringify({a: ``'Hello'``, b: ``'World'``}); ``//结果是 '{"a": "Hello", "b": "World"}'
+```
+
+## 5. Jquery的AJAX
+
+[http://jsonplaceholder.typicode.com/users](http://jsonplaceholder.typicode.com/)
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+		<script>
+			$.ajax({
+				type:'get',
+				url:"http://jsonplaceholder.typicode.com/users",
+				//传递的数据
+				data:"",
+				//返回回来的数据格式
+				dataType:"json",
+				beforeSend:function(){
+					console.log("开始发送");
+					return true;
+				},
+				//请求处理成功以后 获取到的返回的数据
+				success:function(result){
+					console.log(result);
+					let {name,age,score} = result;
+					//数据的填充
+					let str = `<table>
+							<tr>
+								<th>名字</th>
+								<th>年龄</th>
+								<th>分数</th>
+							</tr>
+							<tr>
+								<td>${name}</td>
+								<td>${age}</td>
+								<td>${score}</td>
+							</tr>
+					</table>`;
+					$("body").html(str);
+				}
+			})
+		</script>
+	</body>
+</html>
+
+```
 
