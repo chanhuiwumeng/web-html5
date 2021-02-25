@@ -746,3 +746,143 @@ var` `json = JSON.stringify({a: ``'Hello'``, b: ``'World'``}); ``//结果是 '{"
 
 ```
 
+### 5.1 练习 表单验证
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表单验证</title>
+	</head>
+	<body>
+		<form action="" method="">
+			<label for="name">用户名:</label>
+			<input type="text" name="name" id="name">
+			<br>
+			<input type="submit" value="注册">
+		</form>
+		
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+		<script>
+			$(()=>{
+				$("input").blur(()=>{
+				$("span").text("");	
+				let value = $("input").val();
+					$.ajax({
+						type:"get",
+						url:"http://jsonplaceholder.typicode.com/users",
+						data:"",
+						dataType:"json",
+						success:function(result){
+							//console.log(result);
+							if($("input[type='text']").val()==""){
+								$("input[type='text']").after("<span style='color:red'>用户名不能为空</span>");
+							}else{
+								let names = [];
+								$.each(result,(index,item)=>{
+									names[index] = item.username;
+								})
+								if(names.find(a=>a===$("input[type='text']").val())){
+									$("input[type='text']").after("<span style='color:red'>用户名已经存在</span>");
+								}else{
+									$("input[type='text']").after("<span style='color:green'>用户名可用</span>");
+								}
+							}
+						},
+						error:function(msg){
+							console.log(msg);
+						}
+					})
+				})
+			})
+		</script>
+	</body>
+</html>
+
+```
+
+### 5.2 模拟百度搜索
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>模拟百度搜索</title>
+		<style>
+			input{
+				height: 36px;
+				outline: #4e6ef2;
+			}
+			ul{
+				list-style: none;
+			}
+			a{
+				text-decoration: none;
+				color: #666;
+			}
+			li:hover{
+				background: lightblue;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text" size="120" width="180px" >
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+		<script>
+			$(()=>{
+				$("input").keyup(()=>{
+					let value = $("input").val();
+					$.ajax({
+						type:"get",
+						url:"list.json",
+						data:"",
+						dataType:"json",
+						success:function(result){
+							//判断包含输入值的值
+						let infos = [];	
+						$.each(result,(index,item)=>{
+							if(item.toLowerCase().indexOf(value.toLowerCase())!=-1){
+								infos.push(item);
+							}
+						})	
+						/* 数据展示 */
+						console.log(infos);
+						/* 将数据进行字符串拼接进行填充 */
+						let str = `<ul>`;
+						$.each(infos,(index,item)=>{
+							console.log(index+"=========="+item);
+							str+=`<li><a href='#'>${item}</a></li>`;
+						})
+						str+=`</ul>`;
+						
+						//ul进行填充
+						$("input").after(str);
+						}
+					})
+					
+				})
+			})
+		</script>
+	</body>
+</html>
+
+```
+**list.json**
+
+```json
+[
+	"java",
+	"java编程思想",
+	"java虚拟机",
+	"javaWEB",
+	"Vue.js",
+	"React",
+	"NodeJs",
+	"java从入门到放弃",
+	"30天精通JAVA",
+	"JAVAScript"
+]
+```
+
